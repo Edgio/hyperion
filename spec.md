@@ -4,7 +4,7 @@ version: 1.0-draft
 
 # <a href="#introduction" id="introduction" class="headerlink"></a> Introduction
 
-Hyperion is a subset of [JSON-LD](https://json-ld.org/spec/latest/json-ld) and [Hydra](http://www.hydra-cg.com/spec/latest/core) data specifications. It is pure JSON and meant to provide an easy, low-friction path towards a semantic and hypermedia driven API. The eventual goal is for APIs to become JSON-LD complaint in an incremental fashion through this specification.
+Hyperion is a subset of [JSON-LD](https://json-ld.org/spec/latest/json-ld) and [Hydra](http://www.hydra-cg.com/spec/latest/core) data specifications with some sane defaults. It is pure JSON and meant to provide an easy, low-friction path towards a semantic and hypermedia driven API. The goal is for APIs to use Hyperion as a way to incrementally become JSON-LD complaint. Future versions of this specification will start adding more and more JSON-LD syntax and components.
 
 # <a href="#conformance" id="conformance" class="headerlink"></a> Conformance
 
@@ -42,7 +42,7 @@ Some specifications _leak_ naming conventions from their backend technologies. T
 
 Hyperion specifies a couple keywords as part of the core specification:
 
-* `@id`: Used to uniquely identify things that are being described in the document with a URI.
+* `@id`: Used to uniquely identify things that are being described in the document with a [URI](#conventions-uri).
 * `@type`: Used to set the data type of a node or typed value.
 * `items`: TODO
 * `view`: TODO
@@ -54,7 +54,7 @@ Hyperion specifies a couple keywords as part of the core specification:
 
 # <a href="#document" id="document" class="headerlink"></a> Document Structure
 
-Hyperion is a subset of JSON-LD and Hydra and layers in a few, yet important componets. The components are meant to keep your existing JSON documents close to its original design without making drastic changes. For newer JSON documents it provides a lightweight set of terms to allow for easier consumption.
+Hyperion is a subset of JSON-LD and Hydra and layers in a few, yet important componets. The components are meant to keep your existing JSON documents close to its original design without making drastic changes. For newer JSON documents it provides a lightweight set of terms to allow for easier consumption by clients.
 
 ## <a href="#document" id="document" class="headerlink"></a> Document
 
@@ -112,7 +112,12 @@ A node object represents a JSON object. A node object **MAY** contain the `@id` 
 
 The `@id` term represents a unique node identitifer and **MUST** be a valid [URI](#conventions-uri).
 
-A node object **MUST** contain the `@type` keyword. The `@type` term must have a value representing a type for the client to consume. Types **MAY** be in `PascalCase` and is the preferred way. The `@type` term  **MAY** also be a valid [URI](#conventions-uri).
+A node object **MUST** contain the `@type` keyword. 
+
+The value for `@type` term **MAY** be one of the following:
+
+* A string value representing the type in `PascalCase`.
+* A valid [URI](#conventions-uri).
 
 An example of `@type` with a URI:
 
