@@ -25,8 +25,8 @@ Servers **MUST** send all JSON data in response documents with the header
 Anywhere a **URI** is specified, it must adhere to the following rules:
 
 * **MUST** be a valid URI.
-* **MAY** contain all query string parameters and fragements used to retrieve that node or resource.
-* **SHOULD** be relative path as its sometimes difficult for servers to construct an absolute path reliably.
+* **MAY** contain all query string parameters and fragments used to retrieve that node or resource.
+* **SHOULD** be relative path as it's sometimes difficult for servers to construct an absolute path reliably.
 * **SHOULD** use `-` or hyphen as delimiter for words within the path.
 * **SHOULD** use `camelCase` for query string parameters.
 
@@ -44,17 +44,14 @@ Hyperion specifies a couple keywords as part of the core specification:
 
 * `@id`: Used to uniquely identify things that are being described in the document with a [URI](#conventions-uri).
 * `@type`: Used to set the data type of a node or typed value.
-* `items`: TODO
-* `view`: TODO
-* `totalItems`: TODO
-* `code`: TODO
+
 
 > Note: To avoid compatibility issues, terms starting with an `@` character are to be avoided as they might be used as keyword in future versions of JSON-LD. Terms starting with an `@` character that are not JSON-LD keywords are treated as any other term, i.e., they are ignored.
 
 
 # <a href="#document" id="document" class="headerlink"></a> Document Structure
 
-Hyperion is a subset of JSON-LD and Hydra and layers in a few, yet important componets. The components are meant to keep your existing JSON documents close to its original design without making drastic changes. For newer JSON documents it provides a lightweight set of terms to allow for easier consumption by clients.
+Hyperion is a subset of JSON-LD and Hydra and layers in a few, yet important components. The components are meant to keep your existing JSON documents close to its original design without making drastic changes. For newer JSON documents it provides a lightweight set of terms to allow for easier consumption by clients.
 
 ## <a href="#document" id="document" class="headerlink"></a> Document
 
@@ -110,7 +107,7 @@ The top most JSON object **MUST** be a [node object](#document-components-node-o
 
 A node object represents a JSON object. A node object **MAY** contain the `@id` term unless it is the top most object in which case it **MUST** be included.
 
-The `@id` term represents a unique node identitifer and **MUST** be a valid [URI](#conventions-uri).
+The `@id` term represents a unique node identifier and **MUST** be a valid [URI](#conventions-uri).
 
 A node object **MUST** contain the `@type` keyword. 
 
@@ -153,7 +150,8 @@ A `Collection` is a type of node object used to represent a resource returning m
 A `Collection` **MUST** have the following:
 
 * `@id`: Represents a valid [URI](#conventions-uri). If returning a subset of a collection with a [PartialCollectionView](#document-components-partial-collection-object), then the URI must be the request path excluding all fragments and query string parameters.
-* `items`: Reprents an array of [node objects](#document-components-node-object) with the same type. These node objects **SHOULD** have an `@id`.
+* `@type`: Represents a valid [type](document-components-node-object) as string OR [URI](#conventions-uri).
+* `items`: Represents an array of [node objects](#document-components-node-object) with the same type. These node objects **SHOULD** have an `@id`.
 
 A `Collection` **MAY** have the following:
 * `totalItems`: Represents the total number of _things_ as integer.
@@ -163,7 +161,7 @@ A `Collection` **MAY** have the following:
 {
     "@id": "/person",
     "@type": "Collection",
-    "totalItems": "2",
+    "totalItems": 2,
     "items": [
         {
             "@id": "/person/1",
@@ -189,7 +187,7 @@ Since collections can become large, Web APIs often chose to split a collection i
 A `PartialCollectionView` **MUST** have the following:
 
 * `@id`: Represents a valid [URI](#conventions-uri).
-* `@type`: Represents a valid [URI](#conventions-uri).
+* `@type`: Represents a valid [type](document-components-node-object) as string OR [URI](#conventions-uri).
 
 A `PartialCollectionView` **MAY** have the following:
 
@@ -230,8 +228,50 @@ A `PartialCollectionView` **MAY** have the following:
 
 ### <a href="#document-components-error-code-object" id="document-components-error-code-object" class="headerlink"></a> Error Code Object
 
-    TODO
+Processing errors can be handled by returning a node type of `ErrorCode` to consumers. In addition, an appropriate HTTP status code, as well as a human readable `code` must be returned.
+
+An `ErrorCode` **MUST** have the following:
+
+* `@type`: Represents a valid [type](document-components-node-object) as string OR [URI](#conventions-uri).
+* `code`: A human readable error code as string.
+* `title`: The main error heading as string.
+
+An `ErrorCode` **MAY** have the following:
+
+* `description`: Detail description about the error as string.
+* `statusCode`: Represents the HTTP status code associated with response as integer.
+* `details`: Array of [ErrorCodeDetail](#document-components-error-code-detail-object) objects.
+
+```json
+{
+    "@type": "ErrorCode",
+    "code": "invalid_request",
+    "statusCode": 400,
+    "title": "One or more properties were empty",
+    "description": "One or more required fields were empty or missing from the request.",
+    "details": [
+        {
+            "@type": "ErrorCodeDetail",
+            "source": "/givenName",
+            "description": "Must not be empty"
+        },
+        {
+            "@type": "ErrorCodeDetail",
+            "source": "/familyName",
+            "description": "Must not be empty"
+        }
+    ]
+}
+```
 
 ### <a href="#document-components-error-code-detail-object" id="document-components-error-code-detail-object" class="headerlink"></a> Error Code Detail Object
 
-    TODO
+Some errors require more information about what failed and sometimes where the error occurred. API authors can then provide a node type of `ErrorCodeDetail` object to help pin-point errors. 
+
+An `ErrorCode` **MUST** have the following:
+
+* `@type`: Represents a valid [type](document-components-node-object) as string OR [URI](#conventions-uri).
+* `description`: Detail description about the error as string.
+
+An `ErrorCode` **MAY** have the following:
+* `source`: Represents a JSON Pointer [RFC6901](https://tools.ietf.org/html/rfc6901) as string.
