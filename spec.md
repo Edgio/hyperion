@@ -266,7 +266,7 @@ An `ErrorCode` **MAY** have the following:
 
 ### <a href="#document-components-error-code-detail-object" id="document-components-error-code-detail-object" class="headerlink"></a> Error Code Detail Object
 
-Some errors require more information about what failed and sometimes where the error occurred. API authors can then provide a node type of `ErrorCodeDetail` object to help pin-point errors. 
+Some errors require more information about what failed and sometimes where the error occurred. API authors can then provide a node type of `ErrorCodeDetail` object to help pin-point specific errors. 
 
 An `ErrorCode` **MUST** have the following:
 
@@ -274,4 +274,4 @@ An `ErrorCode` **MUST** have the following:
 * `description`: Detail description about the error as string.
 
 An `ErrorCode` **MAY** have the following:
-* `source`: Represents a JSON Pointer [RFC6901](https://tools.ietf.org/html/rfc6901) as string.
+* `source`: Represents a JSON Pointer [[RFC6901](https://tools.ietf.org/html/rfc6901)] as string.
