@@ -4,6 +4,7 @@ lsi: false
 source: .
 destination: ./public
 encoding: UTF-8
+baseurl: /api-workgroup/hyperion
 
 # github pages we cannot customize
 lsi: false
