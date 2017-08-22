@@ -9,5 +9,3 @@ title: "Specifications"
   {% endif %}
 {% endfor %}
 </div>
-
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.27.4/codemirror.min.js"></script> -->

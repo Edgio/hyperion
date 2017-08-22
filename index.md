@@ -1,4 +1,8 @@
 ---
 layout: default
-redirect_to: "/specs/"
 ---
+
+<script>
+// ghetto redirect
+window.location = "{{site.url}}/specs";
+</script>

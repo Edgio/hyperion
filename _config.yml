@@ -1,10 +1,10 @@
 url: https://pages.git.edgecastcdn.net/api-workgroup/hyperion
+baseurl: /api-workgroup/hyperion
 safe: true
 lsi: false
 source: .
 destination: ./public
 encoding: UTF-8
-baseurl: /api-workgroup/hyperion
 
 # github pages we cannot customize
 lsi: false
@@ -43,6 +43,7 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - .gitignore
+  - ./public
 
 host: 0.0.0.0
 port: 9876
