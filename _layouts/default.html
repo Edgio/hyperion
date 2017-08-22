@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width,initial-scale=1">
-        
+
         {% if page.title %}
             {% assign page_title = page.title | rstrip | upcase | prepend: " &mdash; " %}
         {% endif %}
@@ -27,9 +27,9 @@
                         {% for node in site.navigation %}
                             {% assign url = page.url | replace: "index.html", "" %}
                             {% if url == node.url %}
-                                <a class="mdc-tab mdc-tab--active" href="{{node.url}}">{{node.title}}</a>
+                                <a class="mdc-tab mdc-tab--active" href="{{site.url}}{{node.url}}">{{node.title}}</a>
                             {% else %}
-                                <a class="mdc-tab" href="{{node.url}}">{{node.title}}</a>
+                                <a class="mdc-tab" href="{{site.url}}{{node.url}}">{{node.title}}</a>
                             {% endif %}
                         {% endfor %}
                         <span class="mdc-tab-bar__indicator"></span>
