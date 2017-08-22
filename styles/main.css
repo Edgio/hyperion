@@ -1,0 +1,121 @@
+:root {
+    --mdc-theme-primary: #00aeee;
+    --mdc-theme-background: #212121;
+    --mdc-layout-grid-max-width: 1312px;
+    --mdc-theme-text-primary-on-primary: #00aeee;
+    --mdc-theme-text-primary-on-dark: #fff;
+}
+
+body {
+    font-family: Roboto, sans-serif;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    line-height: 1.25rem;
+    text-decoration: inherit;
+    text-transform: inherit;
+    color: #fff;
+}
+
+.footer_content, .mdc-toolbar__row, .page_content {
+    max-width: 1312px;
+    padding-left: 16px;
+    padding-right: 16px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+a, a:link, a:active, a:visited {
+    -webkit-font-smoothing: antialiased;
+    font-size: .875rem;
+    font-weight: 400;
+    letter-spacing: .04em;
+    line-height: 1.25rem;
+    font-family: Roboto Mono;
+    color: #00aeee;
+    text-decoration: none;
+}
+
+h1, h2, h3, h4 {
+    font-family: Roboto, sans-serif;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    text-decoration: inherit;
+    text-transform: inherit;
+    font-weight: 400;
+}
+
+h1 {
+    /* font-size: 2.813rem;
+    letter-spacing: normal;
+    line-height: 3rem; */
+    font-size: 2.125rem;
+    letter-spacing: normal;
+    line-height: 2.5rem;
+}
+
+h2 {
+    /* font-size: 2.125rem;
+    letter-spacing: normal;
+    line-height: 2.5rem; */
+    font-size: 1.5rem;
+    letter-spacing: normal;
+    line-height: 2rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+    letter-spacing: normal;
+    line-height: 2rem;
+}
+
+nav ol, nav ul {
+    list-style-type: none;
+    margin-left: 0;
+}
+
+pre, code {
+    color: #FF5370;
+    background: #333;
+    padding: 2px 4px;
+}
+
+.mdc-theme-primary {
+    color: #006cb7;
+}
+
+.mdc-theme-background, .mdc-theme--primary-bg { 
+    background: #212121;
+}
+
+.mdc-toolbar--fixed {
+    box-shadow: none;
+    --webkit-box-shadow: none;
+}
+
+.mdc-permanent-drawer {
+    border: 0;
+    height: auto;
+}
+
+.mdc-toolbar__title {
+    font: Roboto Mono;
+    font-weight: 400;
+    text-transform: uppercase;
+    white-space: nowrap;
+    margin-left: 0;
+}
+
+#page-content {
+    margin-top: 32px;
+}
+
+.CodeMirror {
+    height: auto;
+}
+
+.CodeMirror-code {
+    padding: 4px;
+}

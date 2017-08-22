@@ -1,0 +1,57 @@
+url: https://pages.git.edgecastcdn.net/api-workgroup/hyperion
+safe: true
+lsi: false
+source: .
+destination: ./public
+encoding: UTF-8
+
+# github pages we cannot customize
+lsi: false
+whitelist:
+  - jekyll-coffeescript
+  - jekyll-gist
+  - jekyll-paginate
+  - jekyll-redirect-from
+  - jekyll-mentions
+  - jekyll-sitemap
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-gist
+  - jemoji
+incremental: false
+gist:
+  noscript: false
+# customize github pages
+quiet: false
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  input: GFM
+  hard_wrap: false
+  auto_ids: false
+  template: '' # cannot customize
+  math_engine: mathjax # cannot customize
+  syntax_highligher: rouge # cannot customize
+
+gems:
+  - jekyll-redirect-from
+
+exclude:
+  - Rakefile
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - .gitignore
+
+host: 0.0.0.0
+port: 9876
+
+latest_version: 1.0
+
+collections:
+  specs:
+    output: true
+
+navigation:
+- title: Specifications
+  url: /specs/

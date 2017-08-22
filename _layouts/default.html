@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html class="mdc-typography">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        {% if page.title %}
+            {% assign page_title = page.title | rstrip | upcase | prepend: " &mdash; " %}
+        {% endif %}
+        <title>HYPERION{{ page_title  }}</title>
+
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500|Roboto+Mono:400,500" rel="stylesheet" type="text/css">         
+        <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.27.4/codemirror.min.css">
+        <link href="{{site.github.url}}/styles/main.css" media="screen" rel="stylesheet" type="text/css" />
+    </head>
+    <body class="mdc-theme-background">
+
+        <header class="mdc-toolbar mdc-toolbar--fixed mdc-theme-background">
+            <div class="mdc-toolbar__row">
+                <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
+                    <span class="mdc-toolbar__title">Hyperion</span>
+                </section>
+
+                <section class="mdc-toolbar__section mdc-toolbar__section--align-end">
+                    <nav id="main-nav" class="mdc-tab-bar" data-mdc-auto-init="MDCTabBar">
+                        {% for node in site.navigation %}
+                            {% assign url = page.url | replace: "index.html", "" %}
+                            {% if url == node.url %}
+                                <a class="mdc-tab mdc-tab--active" href="{{node.url}}">{{node.title}}</a>
+                            {% else %}
+                                <a class="mdc-tab" href="{{node.url}}">{{node.title}}</a>
+                            {% endif %}
+                        {% endfor %}
+                        <span class="mdc-tab-bar__indicator"></span>
+                    </nav>
+                </section>
+            </div>
+        </header>
+
+        <div class="mdc-toolbar-fixed-adjust mdc-layout-grid page_content">
+            {{ content }}
+        </div><!-- end content -->
+
+  </body>
+</html>

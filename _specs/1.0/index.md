@@ -1,5 +1,5 @@
 ---
-version: 1.0-draft
+version: 1.0
 ---
 
 # <a href="#introduction" id="introduction" class="headerlink"></a> Introduction
