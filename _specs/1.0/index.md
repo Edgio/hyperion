@@ -44,15 +44,15 @@ Hyperion specifies a few keywords as part of the core specification:
 
     Example of the difference between `@id` and a similar property like `id`:
 
-    ```json
-    {
-        "@id": "/connect/userinfo",
-        "@type": "UserInfo",
-        "id": 1,
-        "given_name": "Hubert",
-        "family_name": "Farnsworth"
-    }
-    ```
+```json
+{
+    "@id": "/connect/userinfo",
+    "@type": "UserInfo",
+    "id": 1,
+    "given_name": "Hubert",
+    "family_name": "Farnsworth"
+}
+```
 
 * `@type`: Used to set the type of the [node object](#document-components-node-object). This **MUST** be a string value following the [naming conventions](#conventions-casing).
 * `@links`: Used to represent a collection of [link value objects](#document-components-link-value-object) related to the resource. 
@@ -311,7 +311,7 @@ An `ErrorDetail` **MAY** have the following:
 
 # <a href="#date" id="date" class="headerlink"></a> Date Handling
 
-All dates should be represented as string values following the [ISO 8601](https://www.w3.org/TR/NOTE-datetime) standard. 
+All dates **MUST** be represented as string values following the [ISO 8601](https://www.w3.org/TR/NOTE-datetime) standard. 
 
 All dates **MUST** follow [ISO 8601](https://www.w3.org/TR/NOTE-datetime) standard of `YYYY-MM-DD`.
 
