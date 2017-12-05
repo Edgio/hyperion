@@ -265,7 +265,7 @@ Processing errors can be handled by returning a [node object](#document-componen
 An `Error` **MUST** have the following:
 
 * `@type`: Have a value of `Error`.
-* `code`: A human readable error code as string.
+* `code`: A human readable error code as string following `snake_case`.
 * `title`: The main error heading as string.
 
 An `Error` **MAY** have the following:
@@ -284,12 +284,12 @@ An `Error` **MAY** have the following:
     "details": [
         {
             "@type": "ErrorDetail",
-            "source": "/givenName",
+            "source": "/given_name",
             "description": "Must not be empty"
         },
         {
             "@type": "ErrorDetail",
-            "source": "/familyName",
+            "source": "/family_name",
             "description": "Must not be empty"
         }
     ]
