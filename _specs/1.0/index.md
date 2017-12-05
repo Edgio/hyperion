@@ -4,7 +4,7 @@ version: 1.0
 
 # <a href="#introduction" id="introduction" class="headerlink"></a> Introduction
 
-Hyperion is a lightweight data specification that is a subset of [JSON-LD](https://json-ld.org/spec/latest/json-ld) with some sane defaults. It is pure JSON and meant to provide an easy, low-friction path towards a semantic and hypermedia driven API. The goal is for APIs to use Hyperion as a way to incrementally become JSON-LD complaint. Future versions of this specification will start adding more and more JSON-LD syntax and components.
+Hyperion is a lightweight data specification that is a subset of [JSON-LD](https://json-ld.org/spec/latest/json-ld) with some sane defaults. It is pure JSON and meant to provide an easy, low-friction path towards a semantic and [hypermedia](https://en.wikipedia.org/wiki/HATEOAS) driven API. The goal is for APIs to use Hyperion as a way to incrementally become JSON-LD complaint. Future versions of this specification may start adding more and more JSON-LD syntax and components.
 
 # <a href="#conformance" id="conformance" class="headerlink"></a> Conformance
 
@@ -25,35 +25,45 @@ Servers **MUST** send all JSON data in response documents with the header
 Anywhere a **URI** is specified, it must adhere to the following rules:
 
 * **MUST** be a valid URI.
-* **MAY** contain all query string parameters and fragments used to retrieve that node or resource.
-* **SHOULD** be relative path as it's sometimes difficult for servers to construct an absolute path reliably.
-* **SHOULD** use `-` or hyphen as delimiter for words within the path.
-* **SHOULD** use `camelCase` for query string parameters.
+* **MAY** contain all query string parameters used to retrieve that resource.
+* **MUST** be relative path as it's sometimes difficult for servers to construct an absolute path reliably.
+* **MUST** use `-` or hyphen as delimiter for words within the path.
+* **MUST** use `snake_case` for query string parameters.
 
-## <a href="#conventions-casing" id="conventions-casing" class="headerlink"></a> Term and Property Casing
+## <a href="#conventions-casing" id="conventions-casing" class="headerlink"></a> Naming Conventions
 
-Some specifications _leak_ naming conventions from their backend technologies. To keep JSON language agnostic and easier to consume, we will adhere to JSON naming conventions. 
-
-* **MUST** use `PascalCase` to represent a type.
-* **MUST** use `camelCase` to represent a term or property.
+* **MUST** use `PascalCase` to represent a `@type`.
+* **MUST** use `snake_case` to represent a property.
 * **MUST NOT** use `@` keyword for custom properties as it is reserved.
 
 # <a href="#keywords" id="keywords" class="headerlink"></a> Keywords
 
-Hyperion specifies a couple keywords as part of the core specification:
+Hyperion specifies a few keywords as part of the core specification:
 
-* `@id`: Used to uniquely identify things that are being described in the document with a [URI](#conventions-uri).
-* `@type`: Used to set the data type of a node or typed value.
+* `@id`: Used to specify the [URI](#conventions-uri) for the resource. Can be used by clients to navigate back to that specific resource. This **SHOULD NOT** be confused as the idenitifier for the instance of that resource. 
+
+    Example of the difference between `@id` and a similar property like `id`:
+
+    ```json
+    {
+        "@id": "/connect/userinfo",
+        "@type": "UserInfo",
+        "id": 1,
+        "given_name": "Hubert",
+        "family_name": "Farnsworth"
+    }
+    ```
+
+* `@type`: Used to set the type of the [node object](#document-components-node-object). This **MUST** be a string value following the [naming conventions](#conventions-casing).
+* `@links`: Used to represent a collection of [link value objects](#document-components-link-value-object) related to the resource. 
 
 
-> Note: To avoid compatibility issues, terms starting with an `@` character are to be avoided as they might be used as keyword in future versions of JSON-LD. Terms starting with an `@` character that are not JSON-LD keywords are treated as any other term, i.e., they are ignored.
+> Note: To avoid compatibility issues, properties starting with an `@` character are restricted as they might be used as keywords in future versions of JSON-LD. Properties starting with an `@` character that are not JSON-LD keywords are treated as any other property, i.e., they are ignored. Keywords are case-sensitive.
+>
+> Restricted keywords are: `@context`, `@id`, `@value`, `@language`, `@type`, `@container`, `@list`, `@set`, `@reverse`, `@index`, `@base`, `@vocab`, `@graph`, `@nest`, `@prefix`, `@version`, `@links`
 
 
 # <a href="#document" id="document" class="headerlink"></a> Document Structure
-
-Hyperion is a subset of JSON-LD and layers in a few, yet important components. The components are meant to keep your existing JSON documents close to its original design without making drastic changes. For newer JSON documents it provides a lightweight set of terms to allow for easier consumption by clients.
-
-## <a href="#document" id="document" class="headerlink"></a> Document
 
 All requests sent by the client and responses sent by the server **MUST** be a valid JSON document. 
 
@@ -63,16 +73,16 @@ All requests sent by the client and responses sent by the server **MUST** be a v
 }
 ```
 
-All JSON properties and terms **MUST** follow [naming conventions](#conventions-casing).
+All JSON properties **MUST** follow [naming conventions](#conventions-casing).
 
 ```json
 {
-    "givenName": "Hubert",
-    "familyName": "Farnsworth"
+    "given_name": "Hubert",
+    "family_name": "Farnsworth"
 }
 ```
 
-The _top most_ JSON object **MUST** be a [node object](#document-components-node-object) and **MUST** contain an `@id` term. 
+The _top most_ JSON object **MUST** be a [node object](#document-components-node-object) and **MUST** contain an `@id` property unless _creating_ a new resource.
 
 ```json
 {
@@ -90,28 +100,27 @@ An example of a node with query string parameters:
 }
 ```
 
-The top most JSON object **MUST** be a [node object](#document-components-node-object) and **MUST** contain a `@type` term. 
+The top most JSON object **MUST** be a [node object](#document-components-node-object) and **MUST** contain a `@type` property. 
 
 ```json
 {
     "@id": "/person/1",
     "@type": "Person",
-    "givenName": "Hubert",
-    "familyName": "Farnsworth"
+    "given_name": "Hubert",
+    "family_name": "Farnsworth"
 }
 ```
+
   
-## <a href="#document-components" id="document-components" class="headerlink"></a> Document components
+## <a href="#document-components-node-object" id="document-components-node-object" class="headerlink"></a> Node Object
 
-### <a href="#document-components-node-object" id="document-components-node-object" class="headerlink"></a> Node Object
+A `Node` object represents a JSON object. A `Node` object **MUST** contain the `@id` property if it is the top most object. It **SHOULD NOT** be in the JSON object when _creating_ a resource.
 
-A node object represents a JSON object. A node object **MAY** contain the `@id` term unless it is the top most object in which case it **MUST** be included.
+The `@id` property represents a valid [URI](#conventions-uri) and follows conventions described in the [keywords section](#keywords).
 
-The `@id` term represents a unique node identifier and **MUST** be a valid [URI](#conventions-uri).
+A `Node` object **MUST** contain the `@type` keyword. 
 
-A node object **MUST** contain the `@type` keyword. 
-
-The value for `@type` term **MUST** be a string value representing the type in `PascalCase`.
+The value for `@type` property **MUST** be a string value representing the type following [naming conventions](#conventions-casing).
 
 An example of `@type`:
 
@@ -129,8 +138,8 @@ A node object **MAY** contain nested node objects.
 {
     "@id": "/person/1",
     "@type": "Person",
-    "givenName": "Hubert",
-    "familyName": "Farnsworth",
+    "given_name": "Hubert",
+    "family_name": "Farnsworth",
     "address" : {
         "@id": "/person/1/address",
         "@type": "Address",
@@ -139,72 +148,137 @@ A node object **MAY** contain nested node objects.
 }
 ```
 
-### <a href="#document-components-collection-object" id="document-components-collection-object" class="headerlink"></a> Collection Object
+A node object **MAY** contain a [link object](#document-components-link-collection-object) with the keyword of `@links`.
 
-A `Collection` is a type of node object used to represent a resource returning many of the same kind of _thing_. It **MUST** be the top most JSON object and **MUST NOT** be nested.
+```json
+{
+    "@id": "/person/1",
+    "@type": "Person",
+    "@links" : {
+        "person": {
+            "href": "/person"
+        }
+    },
+    "given_name": "Hubert",
+    "family_name": "Farnsworth"
+}
+```
+
+## <a href="#document-components-link-object" id="document-components-link-object" class="headerlink"></a> Link Object
+
+A `Link` is an object used to represent a collection of [link value objects](#document-components-link-value-object) related to the resource. 
+
+A `Link` **MUST** have the following:
+
+* Nested within a [node object](#document-components-node-object) with a keyword of `@links`.
+
+* Must contain [link value objects](#document-components-link-value-object).
+
+### <a href="#document-components-link-value-object" id="document-components-link-value-object" class="headerlink"></a> Link Value Object  
+    
+A `LinkValue` is an object containing a valid URI and basePath.
+
+A `LinkValue` **MUST** have the property `href` which represents a valid [URI](#conventions-uri).
+
+A `LinkValue` **MAY** have the property `base_path` which represents a path that can be prepended to the `href` value. The value is defined by `scheme`, `host` and optionally a `path`. It **MUST NOT** end with a slash.
+
+```json
+{
+    "@id": "/person/1",
+    "@type": "Person",
+    "@links" : {
+        "person": {
+            "href": "/person"
+        },
+        "permissions": {
+            "href": "/users/1/permissions",
+            "base_path": "https://api.xyz.com/security"
+        }
+    },
+    "given_name": "Hubert",
+    "family_name": "Farnsworth"
+}
+```
+
+## <a href="#document-components-collection-object" id="document-components-collection-object" class="headerlink"></a> Collection Object
+
+A `Collection` is a type of [node object](#document-components-node-object) used to represent a resource returning many of the same kind of _thing_ in a generic way. It **MUST** be the top most JSON object and **MUST NOT** be nested.
 
 A `Collection` **MUST** have the following:
 
 * `@id`: Represents a valid [URI](#conventions-uri).
-* `@type`: Represents a valid [type](document-components-node-object) as string.
-* `items`: Represents an array of [node objects](#document-components-node-object) with the same type. These node objects **SHOULD** have an `@id`.
+* `@type`: Have a value of `Collection`.
+* `items`: Represents an array of _things_. 
+    * Can be a [node objects](#document-components-node-object) with the same type. These node objects **MUST** have an `@id`.
+    * Can be any arbritary _thing_. 
 
 A `Collection` **MAY** have the following:
-* `totalItems`: Represents the total number of _things_ as integer.
-* `first`: Represents a valid [URI](#conventions-uri).
-* `next`: Represents a valid [URI](#conventions-uri).
-* `previous`: Represents a valid [URI](#conventions-uri).
-* `last`: Represents a valid [URI](#conventions-uri).
+* `total_items`: Represents the total number of _things_ as integer.
+* `@links`: Repesents a [link object](#document-components-link-collection-object) with the following keywords specific to pagination:
+    * `first`: Represents a valid [URI](#conventions-uri).
+    * `next`: Represents a valid [URI](#conventions-uri). **MUST NOT** be displayed if on the last page.
+    * `previous`: Represents a valid [URI](#conventions-uri). **MUST NOT** be displayed if on the first page.
+    * `last`: Represents a valid [URI](#conventions-uri).
 
 ```json
 {
-    "@id": "/person?page=2&pageSize=4",
+    "@id": "/person?page=2&page_size=4",
     "@type": "Collection",
+    "@links": {
+        "first": {
+            "href": "/person?page=1&page_size=4"
+        },
+        "next": {
+            "href": "/person?page=3&page_size=4"
+        },
+        "previous": {
+            "href": "/person?page=1&page_size=4"
+        },
+        "last": {
+            "href": "/person?page=5&page_size=4"
+        }
+    },
     "items": [
         {
             "@id": "/person/1",
             "@type": "Person",
-            "givenName": "Hubert",
-            "familyName": "Farnsworth"
+            "given_name": "Hubert",
+            "family_name": "Farnsworth"
         },
         {
             "@id": "/person/2",
             "@type": "Person",
-            "givenName": "Philip",
-            "familyName": "Fry"
+            "given_name": "Philip",
+            "family_name": "Fry"
         },
         ...
     ],
-    "totalItems": "20",
-    "first": "/person?page=1&pageSize=4",
-    "next": "/person?page=3&pageSize=4",
-    "previous": "/person?page=1&pageSize=4",
-    "last": "/person?page=5&pageSize=4"
+    "total_items": 20
 }
 ```
 
 
-### <a href="#document-components-error-object" id="document-components-error-object" class="headerlink"></a> Error Object
+## <a href="#document-components-error-object" id="document-components-error-object" class="headerlink"></a> Error Object
 
-Processing errors can be handled by returning a node type of `Error` to consumers. In addition, an appropriate HTTP status code, as well as a human readable `code` must be returned.
+Processing errors can be handled by returning a [node object](#document-components-node-object) of `Error` to consumers. In addition, an appropriate HTTP status code, a human readable `code` must be returned.
 
 An `Error` **MUST** have the following:
 
-* `@type`: Represents a valid [type](document-components-node-object) as string.
+* `@type`: Have a value of `Error`.
 * `code`: A human readable error code as string.
 * `title`: The main error heading as string.
 
 An `Error` **MAY** have the following:
 
 * `description`: Detail description about the error as string.
-* `statusCode`: Represents the HTTP status code associated with response as integer.
-* `details`: Array of [ErrorDetail](#document-components-error-detail-object) objects.
+* `status_code`: Represents the HTTP status code associated with response as integer.
+* `details`: Array of [error detail objects](#document-components-error-detail-object).
 
 ```json
 {
     "@type": "Error",
     "code": "invalid_request",
-    "statusCode": 400,
+    "status_code": 400,
     "title": "One or more properties were empty",
     "description": "One or more required fields were empty or missing from the request.",
     "details": [
@@ -222,14 +296,50 @@ An `Error` **MAY** have the following:
 }
 ```
 
-### <a href="#document-components-error-detail-object" id="document-components-error-detail-object" class="headerlink"></a> Error Detail Object
+## <a href="#document-components-error-detail-object" id="document-components-error-detail-object" class="headerlink"></a> Error Detail Object
 
-Some errors require more information about what failed and sometimes where the error occurred. API authors can then provide a node type of `ErrorDetail` object to help pin-point specific errors. 
+Some errors require more information about what failed and sometimes where the error occurred. API authors can then provide a [node object](#document-components-node-object) of `ErrorDetail` to help pin-point specific errors. 
 
 An `ErrorDetail` **MUST** have the following:
 
-* `@type`: Represents a valid [type](document-components-node-object) as string.
+* `@type`: Have a value of `ErrorDetail`.
 * `description`: Detail description about the error as string.
 
 An `ErrorDetail` **MAY** have the following:
 * `source`: Represents a JSON Pointer [[RFC6901](https://tools.ietf.org/html/rfc6901)] as string.
+
+
+# <a href="#date" id="date" class="headerlink"></a> Date Handling
+
+All dates should be represented as string values following the [ISO 8601](https://www.w3.org/TR/NOTE-datetime) standard. 
+
+All dates **MUST** follow [ISO 8601](https://www.w3.org/TR/NOTE-datetime) standard of `YYYY-MM-DD`.
+
+An example of _date_ only value.
+
+```json
+{
+    "@id": "/person/1",
+    "@type": "Person",
+    "given_name": "Hubert",
+    "family_name": "Farnsworth",
+    "date_of_birth": "1975-11-30"
+}
+```
+
+All datetime **MUST** be `UTC` following the [ISO 8601](https://www.w3.org/TR/NOTE-datetime) standard of `YYYY-MM-DDThh:mm:ss.sZ`.
+
+> Note: The `Z` designator at the end is what expresses a datetime as UTC. It will be treated as local datetime without it.
+
+An example of UTC _datetime_ value.
+
+```json
+{
+    "@id": "/person/1",
+    "@type": "Person",
+    "given_name": "Hubert",
+    "family_name": "Farnsworth",
+    "date_of_birth": "1975-11-30",
+    "created_at": "2017-11-30T21:43:25Z"
+}
+```
