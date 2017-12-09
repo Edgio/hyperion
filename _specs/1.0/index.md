@@ -29,6 +29,17 @@ Anywhere a **URI** is specified, it must adhere to the following rules:
 * **MUST** be relative path as it's sometimes difficult for servers to construct an absolute path reliably.
 * **MUST** use `-` or hyphen as delimiter for words within the path.
 * **MUST** use `snake_case` for query string parameters.
+* **SHOULD** use lowercase characters for words within the path basename (up to the last occurence of '/').  This is to account for various-case `id`s, such as those found in URL shorteners. E.g. `https://goo.gl/VwUrzz`
+
+### <a href="#urls" id="urls" class="headerlink"></a> URI Path Design
+
+This section describes the structure of the URI path, which must adhere to the following rules:
+
+* **MUST** at the top level include support for sub-service name spacing: `https://api.company.com/**sub_service**/`
+* **MUST** at the second level, provide support for versioning: `https://api.company.com/**sub_service**/v**x[.y]**/`
+* **MUST** increase either `x` or `y` in the version path whenever a breaking change is introduced.  Additions to existing API calls **do not** require version changes.
+
+These two rules promote clear differentiation of sub-services and versions, allowing independent development.
 
 ## <a href="#conventions-casing" id="conventions-casing" class="headerlink"></a> Naming Conventions
 
@@ -40,13 +51,13 @@ Anywhere a **URI** is specified, it must adhere to the following rules:
 
 Hyperion specifies a few keywords as part of the core specification:
 
-* `@id`: Used to specify the [URI](#conventions-uri) for the resource. Can be used by clients to navigate back to that specific resource. This **SHOULD NOT** be confused as the idenitifier for the instance of that resource. 
+* `@id`: Used to specify the [URI](#conventions-uri) for the resource. Can be used by clients to navigate back to that specific resource. This **SHOULD NOT** be confused as the idenitifier for the instance of that resource.
 
     Example of the difference between `@id` and a similar property like `id`:
 
 ```json
 {
-    "@id": "/connect/userinfo",
+    "@id": "/connect/userinfo/1",
     "@type": "UserInfo",
     "id": 1,
     "given_name": "Hubert",
@@ -55,7 +66,7 @@ Hyperion specifies a few keywords as part of the core specification:
 ```
 
 * `@type`: Used to set the type of the [node object](#document-components-node-object). This **MUST** be a string value following the [naming conventions](#conventions-casing).
-* `@links`: Used to represent a collection of [link value objects](#document-components-link-value-object) related to the resource. 
+* `@links`: Used to represent a collection of [link value objects](#document-components-link-value-object) related to the resource.
 
 
 > Note: To avoid compatibility issues, properties starting with an `@` character are restricted as they might be used as keywords in future versions of JSON-LD. Properties starting with an `@` character that are not JSON-LD keywords are treated as any other property, i.e., they are ignored. Keywords are case-sensitive.
@@ -65,7 +76,7 @@ Hyperion specifies a few keywords as part of the core specification:
 
 # <a href="#document" id="document" class="headerlink"></a> Document Structure
 
-All requests sent by the client and responses sent by the server **MUST** be a valid JSON document. 
+All requests sent by the client and responses sent by the server **MUST** be a valid JSON document.
 
 ```json
 {
@@ -100,7 +111,7 @@ An example of a node with query string parameters:
 }
 ```
 
-The top most JSON object **MUST** be a [node object](#document-components-node-object) and **MUST** contain a `@type` property. 
+The top most JSON object **MUST** be a [node object](#document-components-node-object) and **MUST** contain a `@type` property.
 
 ```json
 {
@@ -111,14 +122,14 @@ The top most JSON object **MUST** be a [node object](#document-components-node-o
 }
 ```
 
-  
+
 ## <a href="#document-components-node-object" id="document-components-node-object" class="headerlink"></a> Node Object
 
 A `Node` object represents a JSON object. A `Node` object **MUST** contain the `@id` property if it is the top most object. It **SHOULD NOT** be in the JSON object when _creating_ a resource.
 
 The `@id` property represents a valid [URI](#conventions-uri) and follows conventions described in the [keywords section](#keywords).
 
-A `Node` object **MUST** contain the `@type` keyword. 
+A `Node` object **MUST** contain the `@type` keyword.
 
 The value for `@type` property **MUST** be a string value representing the type following [naming conventions](#conventions-casing).
 
@@ -132,7 +143,7 @@ An example of `@type`:
 }
 ```
 
-A node object **MAY** contain nested node objects. 
+A node object **MAY** contain nested node objects.
 
 ```json
 {
@@ -166,7 +177,7 @@ A node object **MAY** contain a [link object](#document-components-link-collecti
 
 ## <a href="#document-components-link-object" id="document-components-link-object" class="headerlink"></a> Link Object
 
-A `Link` is an object used to represent a collection of [link value objects](#document-components-link-value-object) related to the resource. 
+A `Link` is an object used to represent a collection of [link value objects](#document-components-link-value-object) related to the resource.
 
 A `Link` **MUST** have the following:
 
@@ -174,8 +185,8 @@ A `Link` **MUST** have the following:
 
 * Must contain [link value objects](#document-components-link-value-object).
 
-### <a href="#document-components-link-value-object" id="document-components-link-value-object" class="headerlink"></a> Link Value Object  
-    
+### <a href="#document-components-link-value-object" id="document-components-link-value-object" class="headerlink"></a> Link Value Object
+
 A `LinkValue` is an object containing a valid URI and basePath.
 
 A `LinkValue` **MUST** have the property `href` which represents a valid [URI](#conventions-uri).
@@ -208,9 +219,9 @@ A `Collection` **MUST** have the following:
 
 * `@id`: Represents a valid [URI](#conventions-uri).
 * `@type`: Have a value of `Collection`.
-* `items`: Represents an array of _things_. 
+* `items`: Represents an array of _things_.
     * Can be a [node objects](#document-components-node-object) with the same type. These node objects **MUST** have an `@id`.
-    * Can be any arbritary _thing_. 
+    * Can be any arbritary _thing_.
 
 A `Collection` **MAY** have the following:
 * `total_items`: Represents the total number of _things_ as integer.
@@ -298,7 +309,7 @@ An `Error` **MAY** have the following:
 
 ## <a href="#document-components-error-detail-object" id="document-components-error-detail-object" class="headerlink"></a> Error Detail Object
 
-Some errors require more information about what failed and sometimes where the error occurred. API authors can then provide a [node object](#document-components-node-object) of `ErrorDetail` to help pin-point specific errors. 
+Some errors require more information about what failed and sometimes where the error occurred. API authors can then provide a [node object](#document-components-node-object) of `ErrorDetail` to help pin-point specific errors.
 
 An `ErrorDetail` **MUST** have the following:
 
@@ -311,7 +322,7 @@ An `ErrorDetail` **MAY** have the following:
 
 # <a href="#date" id="date" class="headerlink"></a> Date Handling
 
-All dates **MUST** be represented as string values following the [ISO 8601](https://www.w3.org/TR/NOTE-datetime) standard. 
+All dates **MUST** be represented as string values following the [ISO 8601](https://www.w3.org/TR/NOTE-datetime) standard.
 
 All dates **MUST** follow [ISO 8601](https://www.w3.org/TR/NOTE-datetime) standard of `YYYY-MM-DD`.
 
