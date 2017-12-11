@@ -35,8 +35,8 @@ Anywhere a **URI** is specified, it must adhere to the following rules:
 
 This section describes the structure of the URI path, which must adhere to the following rules:
 
-* **MUST** at the top level include support for sub-service name spacing: `https://api.company.com/**sub_service**/`
-* **MUST** at the second level, provide support for versioning: `https://api.company.com/**sub_service**/v**x[.y]**/`
+* **MUST** at the top level include support for sub-service name spacing: `https://api.company.com/`**`sub-service`**`/`
+* **MUST** at the second level, provide support for versioning: `https://api.company.com/`**`sub-service`**`/v`**`x[.y]`**`/`
 * **MUST** increase either `x` or `y` in the version path whenever a breaking change is introduced.  Additions to existing API calls **do not** require version changes.
 
 These two rules promote clear differentiation of sub-services and versions, allowing independent development.
@@ -224,6 +224,7 @@ A `Collection` **MUST** have the following:
     * Can be any arbritary _thing_.
 
 A `Collection` **MAY** have the following:
+
 * `total_items`: Represents the total number of _things_ as integer.
 * `@links`: Repesents a [link object](#document-components-link-collection-object) with the following keywords specific to pagination:
     * `first`: Represents a valid [URI](#conventions-uri).
