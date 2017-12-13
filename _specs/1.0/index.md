@@ -228,10 +228,10 @@ A `Collection` **MAY** have the following:
 
 * `total_items`: Represents the total number of _things_ as integer.
 * `@links`: Repesents a [link object](#document-components-link-collection-object) with the following keywords specific to pagination:
-    * `first`: Represents a valid [URI](#conventions-uri).
-    * `next`: Represents a valid [URI](#conventions-uri). **MUST NOT** be displayed if on the last page.
-    * `previous`: Represents a valid [URI](#conventions-uri). **MUST NOT** be displayed if on the first page.
-    * `last`: Represents a valid [URI](#conventions-uri).
+    * `first`: Represents a [link value object](#document-components-link-value-object) navigating to the first page in the collection.
+    * `next`: Represents a [link value object](#document-components-link-value-object) navigating to the next page in the collection. **MUST NOT** be displayed if on the last page.
+    * `previous`: Represents a [link value object](#document-components-link-value-object) navigating to the previous page in the collection. **MUST NOT** be displayed if on the first page.
+    * `last`: Represents a [link value object](#document-components-link-value-object) navigating to the last page in the collection.
 
 ```json
 {
