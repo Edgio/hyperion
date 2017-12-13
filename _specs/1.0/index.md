@@ -37,6 +37,7 @@ This section describes the structure of the URI path, which must adhere to the f
 
 * **MUST** at the top level include support for sub-service name spacing: `https://api.company.com/`**`sub-service`**`/`
 * **MUST** at the second level, provide support for versioning: `https://api.company.com/`**`sub-service`**`/v`**`x[.y]`**`/`
+
 * **MUST** increase either `x` or `y` in the version path whenever a breaking change is introduced.  Additions to existing API calls **do not** require version changes.
 
 These two rules promote clear differentiation of sub-services and versions, allowing independent development.
