@@ -167,7 +167,7 @@ A node object **MAY** contain a [link object](#document-components-link-collecti
     "@id": "/users/1",
     "@type": "User",
     "@links" : {
-        "person": {
+        "users": {
             "href": "/users"
         }
     },
@@ -199,7 +199,7 @@ A `LinkValue` **MAY** have the property `base_path` which represents a path that
     "@id": "/users/1",
     "@type": "User",
     "@links" : {
-        "person": {
+        "users": {
             "href": "/users"
         },
         "permissions": {
