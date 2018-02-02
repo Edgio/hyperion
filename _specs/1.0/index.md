@@ -44,7 +44,7 @@ These two rules promote clear differentiation of sub-services and versions, allo
 
 ## <a href="#conventions-casing" id="conventions-casing" class="headerlink"></a> Naming Conventions
 
-* **MUST** use `PascalCase` to represent a `@type`.
+* **MUST** use `PascalCase` and be singular to represent a `@type`.
 * **MUST** use `snake_case` to represent a property.
 * **MUST NOT** use `@` keyword for custom properties as it is reserved.
 
@@ -98,7 +98,7 @@ The _top most_ JSON object **MUST** be a [node object](#document-components-node
 
 ```json
 {
-    "@id": "/people/1",
+    "@id": "/users/1",
     ...
 }
 ```
@@ -107,7 +107,7 @@ An example of a node with query string parameters:
 
 ```json
 {
-    "@id": "/people?page=1",
+    "@id": "/users?page=1",
     ...
 }
 ```
@@ -116,8 +116,8 @@ The top most JSON object **MUST** be a [node object](#document-components-node-o
 
 ```json
 {
-    "@id": "/person/1",
-    "@type": "Person",
+    "@id": "/users/1",
+    "@type": "User",
     "given_name": "Hubert",
     "family_name": "Farnsworth"
 }
@@ -138,8 +138,8 @@ An example of `@type`:
 
 ```json
 {
-    "@id": "/person/1",
-    "@type": "Person",
+    "@id": "/users/1",
+    "@type": "User",
     ...
 }
 ```
@@ -148,12 +148,12 @@ A node object **MAY** contain nested node objects.
 
 ```json
 {
-    "@id": "/person/1",
-    "@type": "Person",
+    "@id": "/users/1",
+    "@type": "User",
     "given_name": "Hubert",
     "family_name": "Farnsworth",
     "address" : {
-        "@id": "/person/1/address",
+        "@id": "/users/1/address",
         "@type": "Address",
         "street": "West 57th Street"
     }
@@ -164,11 +164,11 @@ A node object **MAY** contain a [link object](#document-components-link-collecti
 
 ```json
 {
-    "@id": "/person/1",
-    "@type": "Person",
+    "@id": "/users/1",
+    "@type": "User",
     "@links" : {
         "person": {
-            "href": "/person"
+            "href": "/users"
         }
     },
     "given_name": "Hubert",
@@ -196,11 +196,11 @@ A `LinkValue` **MAY** have the property `base_path` which represents a path that
 
 ```json
 {
-    "@id": "/person/1",
-    "@type": "Person",
+    "@id": "/users/1",
+    "@type": "User",
     "@links" : {
         "person": {
-            "href": "/person"
+            "href": "/users"
         },
         "permissions": {
             "href": "/users/1/permissions",
@@ -235,32 +235,32 @@ A `Collection` **MAY** have the following:
 
 ```json
 {
-    "@id": "/person?page=2&page_size=4",
+    "@id": "/users?page=2&page_size=4",
     "@type": "Collection",
     "@links": {
         "first": {
-            "href": "/person?page=1&page_size=4"
+            "href": "/users?page=1&page_size=4"
         },
         "next": {
-            "href": "/person?page=3&page_size=4"
+            "href": "/users?page=3&page_size=4"
         },
         "previous": {
-            "href": "/person?page=1&page_size=4"
+            "href": "/users?page=1&page_size=4"
         },
         "last": {
-            "href": "/person?page=5&page_size=4"
+            "href": "/users?page=5&page_size=4"
         }
     },
     "items": [
         {
-            "@id": "/person/1",
-            "@type": "Person",
+            "@id": "/users/1",
+            "@type": "User",
             "given_name": "Hubert",
             "family_name": "Farnsworth"
         },
         {
-            "@id": "/person/2",
-            "@type": "Person",
+            "@id": "/users/2",
+            "@type": "User",
             "given_name": "Philip",
             "family_name": "Fry"
         },
@@ -332,8 +332,8 @@ An example of _date_ only value.
 
 ```json
 {
-    "@id": "/person/1",
-    "@type": "Person",
+    "@id": "/users/1",
+    "@type": "User",
     "given_name": "Hubert",
     "family_name": "Farnsworth",
     "date_of_birth": "1975-11-30"
@@ -348,8 +348,8 @@ An example of UTC _datetime_ value.
 
 ```json
 {
-    "@id": "/person/1",
-    "@type": "Person",
+    "@id": "/users/1",
+    "@type": "User",
     "given_name": "Hubert",
     "family_name": "Farnsworth",
     "date_of_birth": "1975-11-30",
