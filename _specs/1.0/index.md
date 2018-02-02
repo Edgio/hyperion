@@ -29,7 +29,7 @@ Anywhere a **URI** is specified, it must adhere to the following rules:
 * **MUST** be relative path as it's sometimes difficult for servers to construct an absolute path reliably.
 * **MUST** use `-` or hyphen as delimiter for words within the path.
 * **MUST** use `snake_case` for query string parameters.
-* **SHOULD** use lowercase characters for words within the path basename (up to the last occurence of '/').  This is to account for various-case `id`s, such as those found in URL shorteners. E.g. `https://goo.gl/VwUrzz`
+* **SHOULD** use lowercase characters for words within the path basename (up to the last occurrence of '/').  This is to account for various-case `id`s, such as those found in URL shorteners. E.g. `https://goo.gl/VwUrzz`
 
 ### <a href="#urls" id="urls" class="headerlink"></a> URI Path Design
 
