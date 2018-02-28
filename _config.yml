@@ -57,3 +57,4 @@ collections:
 navigation:
 - title: Specifications
   url: /specs/
+theme: jekyll-theme-cayman
