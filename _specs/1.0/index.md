@@ -192,7 +192,12 @@ A `LinkValue` is an object containing a valid URI and basePath.
 
 A `LinkValue` **MUST** have the property `href` which represents a valid [URI](#conventions-uri).
 
-A `LinkValue` **MAY** have the property `base_path` which represents a path that can be prepended to the `href` value. The value is defined by `scheme`, `host` and optionally a `path`. It **MUST NOT** end with a slash.
+A `LinkValue` **MAY** have the following:
+
+* `base_path` which represents a path that can be prepended to the `href` value. The value is defined by `scheme`, `host` and optionally a `path`. It **MUST NOT** end with a slash.
+
+* `description` which will provide additional information for each link.
+
 
 ```json
 {
@@ -200,10 +205,12 @@ A `LinkValue` **MAY** have the property `base_path` which represents a path that
     "@type": "User",
     "@links" : {
         "users": {
-            "href": "/users"
+            "href": "/users",
+            "description": "Gets a collection of users"
         },
         "permissions": {
             "href": "/users/1/permissions",
+            "description": "Gets a collection of user permissions",
             "base_path": "https://api.xyz.com/security"
         }
     },
