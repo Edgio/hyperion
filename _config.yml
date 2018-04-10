@@ -34,7 +34,7 @@ kramdown:
   math_engine: mathjax # cannot customize
   syntax_highligher: rouge # cannot customize
 
-gems:
+plugins:
   - jekyll-redirect-from
 
 exclude:
