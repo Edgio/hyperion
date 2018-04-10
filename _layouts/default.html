@@ -29,7 +29,12 @@
                             {% if url == node.url %}
                                 <a class="mdc-tab mdc-tab--active" href="{{site.url}}{{node.url}}">{{node.title}}</a>
                             {% else %}
+                                {% assign external_url = node.url | slice: 0, 4 %}
+                                {% if external_url == 'http' %}
+                                <a class="mdc-tab" href="{{node.url}}">{{node.title}}</a>
+                                {% else %}
                                 <a class="mdc-tab" href="{{site.url}}{{node.url}}">{{node.title}}</a>
+                                {% endif %}
                             {% endif %}
                         {% endfor %}
                         <span class="mdc-tab-bar__indicator"></span>
