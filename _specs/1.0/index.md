@@ -277,6 +277,54 @@ A `Collection` **MAY** have the following:
 }
 ```
 
+## <a href="#document-entry-point" id="document-entry-point" class="headerlink"></a> Entry Point
+
+A `EntryPoint` is a type of [node](#document-components-node) used to represent a resource that clients can use to get more information about an API and provide [links](#document-components-link-collection) to traverse.
+
+It **MUST** be the top most JSON object and **MUST NOT** be nested.
+
+A `EntryPoint` **MUST** have the following:
+
+* `@id`: Represents a valid [URI](#conventions-uri).
+* `@type`: Have a value of `EntryPoint`.
+* `@links`: Repesents a [link](#document-components-link-collection) with navigational _links_ to other APIs and additional resources.
+    * `documentation`: Represents a [link value](#document-components-link-value) navigating to the documentation page.
+    * `support`: Represents a [link value](#document-components-link-value) navigating to the support page.
+
+* `name`: Represents the name of the API as string.
+
+A `EntryPoint` **MAY** have the following:
+
+* `description`: Represents a description of the API as string.
+* `version`: Represents the current version of the API following [SEMVER](https://semver.org) as string. 
+
+```json
+{
+  "@type": "EntryPoint",
+  "@id": "/identity",
+  "@links": {
+    "v1": {
+      "href": "/foo/v1",
+      "description": "This is V1 API"
+    },
+    "v2": {
+      "href": "/foo/v2",
+      "description": "This is V2 API"
+    },
+    "documentation":{
+        "href": "/",
+        "base_path": "https://developer.foo.io"
+    } ,
+    "support": {
+        "href": "/support",
+        "base_path": "https://developer.foo.io"
+    }
+  },
+  "name": "Foo API",
+  "description": "Some description about the API"
+}
+```
+
 
 ## <a href="#document-components-error" id="document-components-error" class="headerlink"></a> Error
 
