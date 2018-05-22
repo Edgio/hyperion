@@ -66,8 +66,8 @@ Hyperion specifies a few keywords as part of the core specification:
 }
 ```
 
-* `@type`: Used to set the type of the [node object](#document-components-node-object). This **MUST** be a string value following the [naming conventions](#conventions-casing).
-* `@links`: Used to represent a collection of [link value objects](#document-components-link-value-object) related to the resource.
+* `@type`: Used to set the type of the [node](#document-components-node). This **MUST** be a string value following the [naming conventions](#conventions-casing).
+* `@links`: Used to represent a collection of [link value](#document-components-link-value) related to the resource.
 
 
 > Note: To avoid compatibility issues, properties starting with an `@` character are restricted as they might be used as keywords in future versions of JSON-LD. Properties starting with an `@` character that are not JSON-LD keywords are treated as any other property, i.e., they are ignored. Keywords are case-sensitive.
@@ -94,7 +94,7 @@ All JSON properties **MUST** follow [naming conventions](#conventions-casing).
 }
 ```
 
-The _top most_ JSON object **MUST** be a [node object](#document-components-node-object) and **MUST** contain an `@id` property unless _creating_ a new resource.
+The _top most_ JSON object **MUST** be a [node](#document-components-node) and **MUST** contain an `@id` property unless _creating_ a new resource.
 
 ```json
 {
@@ -112,7 +112,7 @@ An example of a node with query string parameters:
 }
 ```
 
-The top most JSON object **MUST** be a [node object](#document-components-node-object) and **MUST** contain a `@type` property.
+The top most JSON object **MUST** be a [node](#document-components-node) and **MUST** contain a `@type` property.
 
 ```json
 {
@@ -124,13 +124,13 @@ The top most JSON object **MUST** be a [node object](#document-components-node-o
 ```
 
 
-## <a href="#document-components-node-object" id="document-components-node-object" class="headerlink"></a> Node Object
+## <a href="#document-components-node" id="document-components-node" class="headerlink"></a> Node
 
-A `Node` object represents a JSON object. A `Node` object **MUST** contain the `@id` property if it is the top most object. It **SHOULD NOT** be in the JSON object when _creating_ a resource.
+A `Node` represents a JSON object. A `Node` **MUST** contain the `@id` property if it is the top most object. It **SHOULD NOT** be in the JSON object when _creating_ a resource.
 
 The `@id` property represents a valid [URI](#conventions-uri) and follows conventions described in the [keywords section](#keywords).
 
-A `Node` object **MUST** contain the `@type` keyword.
+A `Node` **MUST** contain the `@type` keyword.
 
 The value for `@type` property **MUST** be a string value representing the type following [naming conventions](#conventions-casing).
 
@@ -144,7 +144,7 @@ An example of `@type`:
 }
 ```
 
-A node object **MAY** contain nested node objects.
+A node **MAY** contain nested nodes.
 
 ```json
 {
@@ -160,7 +160,7 @@ A node object **MAY** contain nested node objects.
 }
 ```
 
-A node object **MAY** contain a [link object](#document-components-link-collection-object) with the keyword of `@links`.
+A node **MAY** contain a [link](#document-components-link-collection) with the keyword of `@links`.
 
 ```json
 {
@@ -176,17 +176,17 @@ A node object **MAY** contain a [link object](#document-components-link-collecti
 }
 ```
 
-## <a href="#document-components-link-object" id="document-components-link-object" class="headerlink"></a> Link Object
+### <a href="#document-components-link" id="document-components-link" class="headerlink"></a> Link
 
-A `Link` is an object used to represent a collection of [link value objects](#document-components-link-value-object) related to the resource.
+A `Link` is an object used to represent a collection of [link value](#document-components-link-value) related to the resource.
 
 A `Link` **MUST** have the following:
 
-* Nested within a [node object](#document-components-node-object) with a keyword of `@links`.
+* Nested within a [node](#document-components-node) with a keyword of `@links`.
 
-* Must contain [link value objects](#document-components-link-value-object).
+* Must contain [link value](#document-components-link-value).
 
-### <a href="#document-components-link-value-object" id="document-components-link-value-object" class="headerlink"></a> Link Value Object
+### <a href="#document-components-link-value" id="document-components-link-value" class="headerlink"></a> Link Value
 
 A `LinkValue` is an object containing a valid URI and basePath.
 
@@ -219,26 +219,26 @@ A `LinkValue` **MAY** have the following:
 }
 ```
 
-## <a href="#document-components-collection-object" id="document-components-collection-object" class="headerlink"></a> Collection Object
+## <a href="#document-components-collection" id="document-components-collection" class="headerlink"></a> Collection
 
-A `Collection` is a type of [node object](#document-components-node-object) used to represent a resource returning many of the same kind of _thing_ in a generic way. It **MUST** be the top most JSON object and **MUST NOT** be nested.
+A `Collection` is a type of [node](#document-components-node) used to represent a resource returning many of the same kind of _thing_ in a generic way. It **MUST** be the top most JSON object and **MUST NOT** be nested.
 
 A `Collection` **MUST** have the following:
 
 * `@id`: Represents a valid [URI](#conventions-uri).
 * `@type`: Have a value of `Collection`.
 * `items`: Represents an array of _things_.
-    * Can be a [node objects](#document-components-node-object) with the same type. These node objects **MUST** have an `@id`.
+    * Can be a [node](#document-components-node) with the same type. These nodes **MUST** have an `@id`.
     * Can be any arbritary _thing_.
 
 A `Collection` **MAY** have the following:
 
 * `total_items`: Represents the total number of _things_ as integer.
-* `@links`: Repesents a [link object](#document-components-link-collection-object) with the following keywords specific to pagination:
-    * `first`: Represents a [link value object](#document-components-link-value-object) navigating to the first page in the collection.
-    * `next`: Represents a [link value object](#document-components-link-value-object) navigating to the next page in the collection. **MUST NOT** be displayed if on the last page.
-    * `previous`: Represents a [link value object](#document-components-link-value-object) navigating to the previous page in the collection. **MUST NOT** be displayed if on the first page.
-    * `last`: Represents a [link value object](#document-components-link-value-object) navigating to the last page in the collection.
+* `@links`: Repesents a [link](#document-components-link-collection) with the following keywords specific to pagination:
+    * `first`: Represents a [link value](#document-components-link-value) navigating to the first page in the collection.
+    * `next`: Represents a [link value](#document-components-link-value) navigating to the next page in the collection. **MUST NOT** be displayed if on the last page.
+    * `previous`: Represents a [link value](#document-components-link-value) navigating to the previous page in the collection. **MUST NOT** be displayed if on the first page.
+    * `last`: Represents a [link value](#document-components-link-value) navigating to the last page in the collection.
 
 ```json
 {
@@ -278,9 +278,9 @@ A `Collection` **MAY** have the following:
 ```
 
 
-## <a href="#document-components-error-object" id="document-components-error-object" class="headerlink"></a> Error Object
+## <a href="#document-components-error" id="document-components-error" class="headerlink"></a> Error
 
-Processing errors can be handled by returning a [node object](#document-components-node-object) of `Error` to consumers. In addition, an appropriate HTTP status code, a human readable `code` must be returned.
+Processing errors can be handled by returning a [node](#document-components-node) of `Error` to consumers. In addition, an appropriate HTTP status code, a human readable `code` must be returned.
 
 An `Error` **MUST** have the following:
 
@@ -292,7 +292,7 @@ An `Error` **MAY** have the following:
 
 * `description`: Detail description about the error as string.
 * `status_code`: Represents the HTTP status code associated with response as integer.
-* `details`: Array of [error detail objects](#document-components-error-detail-object).
+* `details`: Array of [error detail](#document-components-error-detail).
 
 ```json
 {
@@ -316,9 +316,9 @@ An `Error` **MAY** have the following:
 }
 ```
 
-## <a href="#document-components-error-detail-object" id="document-components-error-detail-object" class="headerlink"></a> Error Detail Object
+## <a href="#document-components-error-detail" id="document-components-error-detail" class="headerlink"></a> Error Detail
 
-Some errors require more information about what failed and sometimes where the error occurred. API authors can then provide a [node object](#document-components-node-object) of `ErrorDetail` to help pin-point specific errors.
+Some errors require more information about what failed and sometimes where the error occurred. API authors can then provide a [node](#document-components-node) of `ErrorDetail` to help pin-point specific errors.
 
 An `ErrorDetail` **MUST** have the following:
 
