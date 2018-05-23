@@ -31,16 +31,36 @@ Anywhere a **URI** is specified, it must adhere to the following rules:
 * **MUST** use `snake_case` for query string parameters.
 * **SHOULD** use lowercase characters for words within the path basename (up to the last occurrence of '/').  This is to account for various-case `id`s, such as those found in URL shorteners. E.g. `https://goo.gl/VwUrzz`
 
-### <a href="#urls" id="urls" class="headerlink"></a> URI Path Design
+### <a href="#conventions-sub-service" id="urls" class="headerlink"></a> Sub-service Path
 
-This section describes the structure of the URI path, which must adhere to the following rules:
+APIs **MUST** provide a sub-service path in the URI as a way to create a namespace for your endpoints.
 
-* **MUST** at the top level include support for sub-service name spacing: `https://api.company.com/`**`sub-service`**`/`
-* **MUST** at the second level, provide support for versioning: `https://api.company.com/`**`sub-service`**`/v`**`x[.y]`**`/`
+A `sub-service` URI path **MUST** have the following:
 
-* **MUST** increase either `x` or `y` in the version path whenever a breaking change is introduced.  Additions to existing API calls **do not** require version changes.
+* First path after the host following [URI](#conventions-uri) conventions. `https://api.company.com/`**`sub-service`**`/`
+* Provide support for [versioning](#conventions-versioning). `https://api.company.com/`**`sub-service`**`/v`**`Major[.Minor]`**`/`
 
 These two rules promote clear differentiation of sub-services and versions, allowing independent development.
+
+### <a href="#conventions-versioning" id="urls" class="headerlink"></a> Versioning 
+
+APIs **MUST** provide versioning in the URI path, following the sub-service path.
+
+**MUST** increase either `Major` or `Minor` in the version path whenever a breaking change is introduced. `/vMajor[.Minor]`
+    
+* **SHOULD NOT** increase version if adding new endpoints or fields.
+
+* **SHOULD** increase version if changing behavior for an existing API endpoint:
+
+    * Such as modifying the HTTP status code
+    * Changing data format
+    * Changing the resource, ie. removing or renaming fields
+    * Anything that would violate the [Principal of Least Astonishmnet](https://en.wikipedia.org/wiki/Principle_of_least_astonishment)
+
+
+`https://api.company.com/sub-service/v1`
+
+`https://api.company.com/sub-service/v1.1`
 
 ## <a href="#conventions-casing" id="conventions-casing" class="headerlink"></a> Naming Conventions
 
@@ -160,7 +180,7 @@ A node **MAY** contain nested nodes.
 }
 ```
 
-A node **MAY** contain a [link](#document-components-link-collection) with the keyword of `@links`.
+A node **MAY** contain [links](#document-components-link-collection) with the keyword of `@links`.
 
 ```json
 {
@@ -279,37 +299,43 @@ A `Collection` **MAY** have the following:
 
 ## <a href="#document-entry-point" id="document-entry-point" class="headerlink"></a> Entry Point
 
-A `EntryPoint` is a type of [node](#document-components-node) used to represent a resource that clients can use to get more information about an API and provide [links](#document-components-link-collection) to traverse.
+An `EntryPoint` is a type of [node](#document-components-node) used to represent a resource that clients can use to get more information about an API and provide [links](#document-components-link-collection) to traverse.
 
 It **MUST** be the top most JSON object and **MUST NOT** be nested.
 
-A `EntryPoint` **MUST** have the following:
+An `EntryPoint` **MUST** have the following:
 
 * `@id`: Represents a valid [URI](#conventions-uri).
 * `@type`: Have a value of `EntryPoint`.
 * `@links`: Repesents a [link](#document-components-link-collection) with navigational _links_ to other APIs and additional resources.
-    * `documentation`: Represents a [link value](#document-components-link-value) navigating to the documentation page.
-    * `support`: Represents a [link value](#document-components-link-value) navigating to the support page.
+
+A `EntryPoint` **SHOULD** have the following in the `@links` object:
+
+* `documentation`: Represents a [link value](#document-components-link-value) navigating to the documentation page.
+* `support`: Represents a [link value](#document-components-link-value) navigating to the support page.
+
+An `EntryPoint` **SHOULD** have the following:
 
 * `name`: Represents the name of the API as string.
+* `version`: Represents the current version of the API following [versioning](#conventions-versioning) conventions as string.
 
 A `EntryPoint` **MAY** have the following:
 
 * `description`: Represents a description of the API as string.
-* `version`: Represents the current version of the API following [SEMVER](https://semver.org) as string. 
+
 
 ```json
 {
   "@type": "EntryPoint",
-  "@id": "/identity",
+  "@id": "/foo/v1",
   "@links": {
-    "v1": {
-      "href": "/foo/v1",
-      "description": "This is V1 API"
+    "users": {
+      "href": "/foo/v1/users",
+      "description": "This is the users endpoint"
     },
-    "v2": {
-      "href": "/foo/v2",
-      "description": "This is V2 API"
+    "customers": {
+      "href": "/foo/v1/customers",
+      "description": "This is the customer endpoint"
     },
     "documentation":{
         "href": "/",
@@ -320,8 +346,9 @@ A `EntryPoint` **MAY** have the following:
         "base_path": "https://developer.foo.io"
     }
   },
-  "name": "Foo API",
-  "description": "Some description about the API"
+  "name": "Foo v1 API",
+  "description": "Description about Foo API",
+  "version": "v1"
 }
 ```
 
