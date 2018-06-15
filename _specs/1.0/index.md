@@ -68,6 +68,42 @@ APIs **MUST** provide versioning in the URI path, following the sub-service path
 * **MUST** use `snake_case` to represent a property.
 * **MUST NOT** use `@` keyword for custom properties as it is reserved.
 
+
+## <a href="#date" id="date" class="headerlink"></a> Date Handling
+
+All dates **MUST** be represented as string values following the [ISO 8601](https://www.w3.org/TR/NOTE-datetime) standard.
+
+All dates **MUST** follow [ISO 8601](https://www.w3.org/TR/NOTE-datetime) standard of `YYYY-MM-DD`.
+
+An example of _date_ only value.
+
+```json
+{
+    "@id": "/users/1",
+    "@type": "User",
+    "given_name": "Hubert",
+    "family_name": "Farnsworth",
+    "date_of_birth": "1975-11-30"
+}
+```
+
+All datetime **MUST** be `UTC` following the [ISO 8601](https://www.w3.org/TR/NOTE-datetime) standard of `YYYY-MM-DDThh:mm:ss.sZ`.
+
+> Note: The `Z` designator at the end is what expresses a datetime as UTC. It will be treated as local datetime without it.
+
+An example of UTC _datetime_ value.
+
+```json
+{
+    "@id": "/users/1",
+    "@type": "User",
+    "given_name": "Hubert",
+    "family_name": "Farnsworth",
+    "date_of_birth": "1975-11-30",
+    "created_at": "2017-11-30T21:43:25Z"
+}
+```
+
 # <a href="#keywords" id="keywords" class="headerlink"></a> Keywords
 
 Hyperion specifies a few keywords as part of the core specification:
@@ -402,39 +438,3 @@ An `ErrorDetail` **MUST** have the following:
 
 An `ErrorDetail` **MAY** have the following:
 * `source`: Represents a JSON Pointer [[RFC6901](https://tools.ietf.org/html/rfc6901)] as string.
-
-
-# <a href="#date" id="date" class="headerlink"></a> Date Handling
-
-All dates **MUST** be represented as string values following the [ISO 8601](https://www.w3.org/TR/NOTE-datetime) standard.
-
-All dates **MUST** follow [ISO 8601](https://www.w3.org/TR/NOTE-datetime) standard of `YYYY-MM-DD`.
-
-An example of _date_ only value.
-
-```json
-{
-    "@id": "/users/1",
-    "@type": "User",
-    "given_name": "Hubert",
-    "family_name": "Farnsworth",
-    "date_of_birth": "1975-11-30"
-}
-```
-
-All datetime **MUST** be `UTC` following the [ISO 8601](https://www.w3.org/TR/NOTE-datetime) standard of `YYYY-MM-DDThh:mm:ss.sZ`.
-
-> Note: The `Z` designator at the end is what expresses a datetime as UTC. It will be treated as local datetime without it.
-
-An example of UTC _datetime_ value.
-
-```json
-{
-    "@id": "/users/1",
-    "@type": "User",
-    "given_name": "Hubert",
-    "family_name": "Farnsworth",
-    "date_of_birth": "1975-11-30",
-    "created_at": "2017-11-30T21:43:25Z"
-}
-```
