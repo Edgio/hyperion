@@ -106,6 +106,25 @@ An example of UTC _datetime_ value.
 }
 ```
 
+## <a href="#date" id="date" class="headerlink"></a> Relative Time Handling
+
+APIs that need to implement relative datetime functionality **MUST** refer to specifications defined in the [Relative Time]({{site.url}}/versions/{{site.latest_version}}/relative-time) section.
+
+An example of _relative time_.
+
+`https://api.vdms.io/analytics/v1/time-series?start=now-1M&end=now`
+
+```json
+{
+    "@id": "/analytics/v1/time-series",
+    "@type": "TimeSeries",
+    "start": "2018-05-18T21:43:25Z",
+    "end": "2018-06-18T21:43:25Z",
+    ...
+}
+```
+
+
 # <a href="#keywords" id="keywords" class="headerlink"></a> Keywords
 
 Hyperion specifies a few keywords as part of the core specification:
