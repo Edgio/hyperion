@@ -10,7 +10,7 @@ Hyperion is a lightweight data specification that is a subset of [JSON-LD](https
 
 # <a href="#conformance" id="conformance" class="headerlink"></a> Conformance
 
-The key words may, must, must not, recommended, should, and should not are to be interpreted as described in [[RFC2119](http://tools.ietf.org/html/rfc2119)].
+The keywords may, must, must not, recommended, should, and should not are to be interpreted as described in [[RFC2119](http://tools.ietf.org/html/rfc2119)].
 
 # <a href="#conventions" id="conventions" class="headerlink"></a> Conventions
 
@@ -106,17 +106,17 @@ An example of UTC _datetime_ value.
 }
 ```
 
-## <a href="#date" id="date" class="headerlink"></a> Relative Time Handling
+## <a href="#datetime-range" id="datetime-range" class="headerlink"></a> Datetime Range Handling
 
-APIs that need to implement relative datetime functionality **MUST** refer to specifications defined in the [Relative Time]({{site.url}}/versions/{{site.latest_version}}/relative-time) section.
+APIs that need to implement datetime range functionality **MUST** refer to specifications defined in the [datetime range]({{site.url}}/versions/{{site.latest_version}}/time-range) section.
 
-An example of _relative time_.
+An example of _time range_ using relative time.
 
 `https://api.vdms.io/analytics/v1/time-series?start=now-1M&end=now`
 
 ```json
 {
-    "@id": "/analytics/v1/time-series",
+    "@id": "/analytics/v1/time-series?start=now-1M&end=now",
     "@type": "TimeSeries",
     "start": "2018-05-18T21:43:25Z",
     "end": "2018-06-18T21:43:25Z",
