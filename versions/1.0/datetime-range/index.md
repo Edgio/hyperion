@@ -62,7 +62,7 @@ The following modifiers and time ranges **MAY** be used in conjunction with the 
 
 * `[y]`ears time range to add/subtract to `now` datetime keyword.
 
-* `[M]`onths time range to add/subtract to `now` datetime keyword.
+* `[M]`onths time range to add/subtract to `now` datetime keyword. 
 
 * `[w]`eeks time range to add/subtract to `now` datetime keyword.
 
@@ -72,15 +72,16 @@ The following modifiers and time ranges **MAY** be used in conjunction with the 
 
 * `[s]`econds time range to add/subtract to `now` datetime keyword.
 
+> Note: If a requested datetime falls on an invalid date when using month time range `[M]`, APIs must add/subtract days until a valid datetime is found.
 
 Example of _datetime ranges_.
 
-| Requested         | Current Date      | Result          |  
-| ----------------- | ----------------- | --------------- |
-| now+1d            | 2018-06-18        | 2018-06-19      |
+| Requested         | Current Date      | Result          | Notes 
+| ----------------- | ----------------- | --------------- | --------------- 
+| now+1d            | 2018-06-18        | 2018-06-19      | 
+| now+1w            | 2018-06-18        | 2018-06-25      | 
+| now-1M            | 2018-05-31        | 2018-04-30      | Since April does not have 31 days, we subtract a day until we reached a valid date
 | now-1M            | 2018-06-18        | 2018-05-18      |
-| now+1w            | 2018-06-18        | 2018-06-25      |
-
 
 # <a href="#datetime-range-absolute-datetime" id="datetime-range-absolute-datetime" class="headerlink"></a> Absolute Datetime Format
 
