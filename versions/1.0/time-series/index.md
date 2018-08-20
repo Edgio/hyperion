@@ -1,34 +1,34 @@
 ---
 layout: default
-title: "Datetime Range"
+title: "Time Series"
 version: 1.0
 ---
 
-# <a href="#datetime-range-introduction" id="datetime-range-introduction" class="headerlink"></a> Datetime Range Introduction
+# <a href="#time-series-introduction" id="time-series-introduction" class="headerlink"></a> Time Series Introduction
 
 Some APIs need the ability to be able to return data based on a time range. For example, handling reporting or scheduling data.
 
-# <a href="#datetime-range-conformance" id="datetime-range-conformance" class="headerlink"></a> Conformance
+# <a href="#time-series-conformance" id="time-series-conformance" class="headerlink"></a> Conformance
 
 The keywords may, must, must not, recommended, should, and should not are to be interpreted as described in [[RFC2119](http://tools.ietf.org/html/rfc2119)].
 
-# <a href="#datetime-range-conventions" id="datetime-range-conventions" class="headerlink"></a> Conventions
+# <a href="#time-series-conventions" id="time-series-conventions" class="headerlink"></a> Conventions
 
-## <a href="#datetime-range-conventions-uri" id="datetime-range-conventions-uri" class="headerlink"></a> URI
+## <a href="#time-series-conventions-uri" id="time-series-conventions-uri" class="headerlink"></a> URI
 
 Anywhere a **URI** is specified, it **MUST** follow the rules defined in the [Hyperion]({{site.url}}/versions/{{site.latest_version}}) specification.
 
-## <a href="#datetime-range-conventions-query-params" id="datetime-range-conventions-query-params" class="headerlink"></a> Querystring Parameters
+## <a href="#time-series-conventions-query-params" id="time-series-conventions-query-params" class="headerlink"></a> Querystring Parameters
 
 APIs **MAY** have the following querystring parameters:
 
-* `start` accepts a string value with the start date as [absolute](#datetime-range-absolute-datetime) or [relative](#datetime-range-datetime) datetime format.
+* `start` accepts a string value with the start date as [absolute](#time-series-absolute-datetime) or [relative](#time-series-datetime) datetime format.
 
-* `end` accepts a string value with the end date as [absolute](#datetime-range-absolute-datetime) or [relative](#datetime-range-datetime) datetime format.
+* `end` accepts a string value with the end date as [absolute](#time-series-absolute-datetime) or [relative](#time-series-datetime) datetime format.
 
 If _no_ query parameters are specified, the API **MUST** return a response with a default value for both fields. 
 
-## <a href="#datetime-range-reflected-date" id="datetime-range-reflected-date" class="headerlink"></a> Reflected date
+## <a href="#time-series-reflected-date" id="time-series-reflected-date" class="headerlink"></a> Reflected date
 
 To ensure that the client's request was properly executed, APIs **MUST** return the `start` and `end` datetimes as reflected values in the response body.
 
@@ -48,7 +48,7 @@ Example of the `start` and `end` time range _reflected_ in the response body.
 }
 ```
 
-# <a href="#datetime-range-datetime" id="datetime-range-datetime" class="headerlink"></a> Relative Datetime Format
+# <a href="#time-series-datetime" id="time-series-datetime" class="headerlink"></a> Relative Datetime Format
 
 APIs **MUST** accept the `now` keyword with optional modifiers when handling relative datetime.
 
@@ -83,11 +83,11 @@ Example of _datetime ranges_.
 | now-1M            | 2018-05-31        | 2018-04-30      | Since April does not have 31 days, we subtract a day until we reached a valid date
 | now-1M            | 2018-06-18        | 2018-05-18      |
 
-# <a href="#datetime-range-absolute-datetime" id="datetime-range-absolute-datetime" class="headerlink"></a> Absolute Datetime Format
+# <a href="#time-series-absolute-datetime" id="time-series-absolute-datetime" class="headerlink"></a> Absolute Datetime Format
 
 APIs **MUST** accept absolute datetime following [ISO 8601](https://www.w3.org/TR/NOTE-datetime) standard as defined in the [Hyperion]({{site.url}}/versions/{{site.latest_version}}) specification.
 
-# <a href="#datetime-range-datetime-example" id="datetime-range-datetime-example" class="headerlink"></a> Example Usage
+# <a href="#time-series-datetime-example" id="time-series-datetime-example" class="headerlink"></a> Example Usage
 
 > Note: In the following examples, `now` represents `2018-06-18T00:00:00Z`
 
@@ -105,7 +105,7 @@ This example gets time series data using API default values. Notice how the `sta
 }
 ```
 
-This example gets time series data using a [relative datetime](#datetime-range-datetime) of _one month ago_ for the `start` querystring parameter.
+This example gets time series data using a [relative datetime](#time-series-datetime) of _one month ago_ for the `start` querystring parameter.
 
 `https://api.vdms.io/analytics/v1/time-series?start=now-1M`
 
@@ -119,7 +119,7 @@ This example gets time series data using a [relative datetime](#datetime-range-d
 }
 ```
 
-This example gets time series data using a [relative datetime](#datetime-range-datetime) of _one week ago_ for `start` and one day ago for `end` querystring parameters.
+This example gets time series data using a [relative datetime](#time-series-datetime) of _one week ago_ for `start` and one day ago for `end` querystring parameters.
 
 `https://api.vdms.io/analytics/v1/time-series?start=now-1w&end=now-1d`
 
@@ -133,7 +133,7 @@ This example gets time series data using a [relative datetime](#datetime-range-d
 }
 ```
 
-This example gets time series data using an [absolute datetime](#datetime-range-absolute-datetime) for `start` and [relative datetime](#datetime-range-datetime) of _one day ago_ for `end` querystring parameters.
+This example gets time series data using an [absolute datetime](#time-series-absolute-datetime) for `start` and [relative datetime](#time-series-datetime) of _one day ago_ for `end` querystring parameters.
 
 `https://api.vdms.io/analytics/v1/time-series?start=2018-05-18T21:43:25Z&end=now-1d`
 

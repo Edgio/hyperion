@@ -106,11 +106,11 @@ An example of UTC _datetime_ value.
 }
 ```
 
-## <a href="#datetime-range" id="datetime-range" class="headerlink"></a> Datetime Range Handling
+## <a href="#time-series" id="datetime-range" class="headerlink"></a> Time Series
 
-APIs that need to implement datetime range functionality **MUST** refer to specifications defined in the [datetime range]({{site.url}}/versions/{{site.latest_version}}/datetime-range) section.
+APIs that need to implement datetime range functionality **MUST** refer to specifications defined in the [time series]({{site.url}}/versions/{{site.latest_version}}/time-series) section.
 
-An example of _datetime range_ using relative time.
+An example of _time series_ using relative time.
 
 `https://api.vdms.io/analytics/v1/time-series?start=now-1M&end=now`
 
