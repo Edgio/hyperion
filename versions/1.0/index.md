@@ -106,9 +106,9 @@ An example of UTC _datetime_ value.
 }
 ```
 
-## <a href="#time-series" id="datetime-range" class="headerlink"></a> Time Series
+## <a href="#time-series" id="time-series" class="headerlink"></a> Time Series
 
-APIs that need to implement datetime range functionality **MUST** refer to specifications defined in the [time series]({{site.url}}/versions/{{site.latest_version}}/time-series) section.
+APIs that need to implement time series functionality **MUST** refer to specifications defined in the [time series]({{site.url}}/versions/{{site.latest_version}}/time-series) section.
 
 An example of _time series_ using relative time.
 
