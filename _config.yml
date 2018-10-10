@@ -50,12 +50,8 @@ port: 9876
 
 latest_version: 1.0
 
-collections:
-  specs:
-    output: true
-
 navigation:
-- title: Specifications
-  url: /specs/
+- title: Current Version
+  url: /versions/
 - title: Github
   url: https://github.com/VerizonDigital/hyperion

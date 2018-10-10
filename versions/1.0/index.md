@@ -1,4 +1,6 @@
 ---
+layout: default
+title: "Version - 1.0"
 version: 1.0
 ---
 
@@ -8,7 +10,7 @@ Hyperion is a lightweight data specification that is a subset of [JSON-LD](https
 
 # <a href="#conformance" id="conformance" class="headerlink"></a> Conformance
 
-The key words may, must, must not, recommended, should, and should not are to be interpreted as described in [[RFC2119](http://tools.ietf.org/html/rfc2119)].
+The keywords may, must, must not, recommended, should, and should not are to be interpreted as described in [[RFC2119](http://tools.ietf.org/html/rfc2119)].
 
 # <a href="#conventions" id="conventions" class="headerlink"></a> Conventions
 
@@ -67,6 +69,61 @@ APIs **MUST** provide versioning in the URI path, following the sub-service path
 * **MUST** use `PascalCase` and be singular to represent a `@type`.
 * **MUST** use `snake_case` to represent a property.
 * **MUST NOT** use `@` keyword for custom properties as it is reserved.
+
+
+## <a href="#date" id="date" class="headerlink"></a> Date Handling
+
+All dates **MUST** be represented as string values following the [ISO 8601](https://www.w3.org/TR/NOTE-datetime) standard.
+
+All dates **MUST** follow [ISO 8601](https://www.w3.org/TR/NOTE-datetime) standard of `YYYY-MM-DD`.
+
+An example of _date_ only value.
+
+```json
+{
+    "@id": "/users/1",
+    "@type": "User",
+    "given_name": "Hubert",
+    "family_name": "Farnsworth",
+    "date_of_birth": "1975-11-30"
+}
+```
+
+All datetime **MUST** be `UTC` following the [ISO 8601](https://www.w3.org/TR/NOTE-datetime) standard of `YYYY-MM-DDThh:mm:ss.sZ`.
+
+> Note: The `Z` designator at the end is what expresses a datetime as UTC. It will be treated as local datetime without it.
+
+An example of UTC _datetime_ value.
+
+```json
+{
+    "@id": "/users/1",
+    "@type": "User",
+    "given_name": "Hubert",
+    "family_name": "Farnsworth",
+    "date_of_birth": "1975-11-30",
+    "created_at": "2017-11-30T21:43:25Z"
+}
+```
+
+## <a href="#time-series" id="time-series" class="headerlink"></a> Time Series
+
+APIs that need to implement time series functionality **MUST** refer to specifications defined in the [time series]({{site.url}}/versions/{{site.latest_version}}/time-series) section.
+
+An example of _time series_ using relative time.
+
+`https://api.vdms.io/analytics/v1/time-series?start=now-1M&end=now`
+
+```json
+{
+    "@id": "/analytics/v1/time-series?start=now-1M&end=now",
+    "@type": "TimeSeries",
+    "start": "2018-05-18T21:43:25Z",
+    "end": "2018-06-18T21:43:25Z",
+    ...
+}
+```
+
 
 # <a href="#keywords" id="keywords" class="headerlink"></a> Keywords
 
@@ -402,39 +459,3 @@ An `ErrorDetail` **MUST** have the following:
 
 An `ErrorDetail` **MAY** have the following:
 * `source`: Represents a JSON Pointer [[RFC6901](https://tools.ietf.org/html/rfc6901)] as string.
-
-
-# <a href="#date" id="date" class="headerlink"></a> Date Handling
-
-All dates **MUST** be represented as string values following the [ISO 8601](https://www.w3.org/TR/NOTE-datetime) standard.
-
-All dates **MUST** follow [ISO 8601](https://www.w3.org/TR/NOTE-datetime) standard of `YYYY-MM-DD`.
-
-An example of _date_ only value.
-
-```json
-{
-    "@id": "/users/1",
-    "@type": "User",
-    "given_name": "Hubert",
-    "family_name": "Farnsworth",
-    "date_of_birth": "1975-11-30"
-}
-```
-
-All datetime **MUST** be `UTC` following the [ISO 8601](https://www.w3.org/TR/NOTE-datetime) standard of `YYYY-MM-DDThh:mm:ss.sZ`.
-
-> Note: The `Z` designator at the end is what expresses a datetime as UTC. It will be treated as local datetime without it.
-
-An example of UTC _datetime_ value.
-
-```json
-{
-    "@id": "/users/1",
-    "@type": "User",
-    "given_name": "Hubert",
-    "family_name": "Farnsworth",
-    "date_of_birth": "1975-11-30",
-    "created_at": "2017-11-30T21:43:25Z"
-}
-```
