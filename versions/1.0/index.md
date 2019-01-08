@@ -354,6 +354,31 @@ A `Collection` **MAY** have the following:
 }
 ```
 
+## <a href="#document-components-collection" id="document-components-collection" class="headerlink"></a> Partial Collection
+A `PartialCollection` is a type of [node](#document-components-node) used to represent a a specifie resource fields based on query string parameter
+* `fields`: query string parameter comma delimited list of fields. May include nested json fields separated by dot
+Has the same attributes as Collection time except resource items are limited to only requested fields.
+```json
+{
+    "@id": "/users?fields=given_name,address.zip",
+    "@type": "PartialCollection",
+    "items": [
+        {
+            "given_name": "Hubert",
+            "address.zip": "90094"
+        },
+        {
+            "given_name": "Philip",
+            "address.zip": "90094"
+        },
+        ...
+    ],
+    "total_items": 20
+}
+```
+
+
+
 ## <a href="#document-entry-point" id="document-entry-point" class="headerlink"></a> Entry Point
 
 An `EntryPoint` is a type of [node](#document-components-node) used to represent a resource that clients can use to get more information about an API and provide [links](#document-components-link-collection) to traverse.
