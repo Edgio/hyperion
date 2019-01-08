@@ -355,9 +355,9 @@ A `Collection` **MAY** have the following:
 ```
 
 ## <a href="#document-components-collection" id="document-components-collection" class="headerlink"></a> Partial Collection
-A `PartialCollection` is a type of [node](#document-components-node) used to represent a a specifie resource fields based on query string parameter
+A `PartialCollection` is a type of [node](#document-components-node) used to represent a specific resource fields based on query string parameter
 * `fields`: query string parameter comma delimited list of fields. May include nested json fields separated by dot
-Has the same attributes as Collection time except resource items are limited to only requested fields.
+Has the same attributes as Collection type except resource items are limited to only requested fields.
 ```json
 {
     "@id": "/users?fields=given_name,address.zip",
