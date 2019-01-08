@@ -18,3 +18,8 @@ Requirements:
 1. Host the site locally while editing:
 
     `$ bundle exec rake preview:browser`
+    
+Documentation:
+--------------
+
+Hyperion docs are hosted at https://verizondigital.github.io/hyperion.
