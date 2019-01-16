@@ -360,7 +360,7 @@ A `PartialCollection` is a type of [node](#document-components-node) used to rep
 Has the same attributes as Collection type except resource items are limited to only requested fields.
 ```json
 {
-    "@id": "/users?fields=given_name,address.zip",
+    "@id": "/users?fields=/given_name,/address/zip",
     "@type": "PartialCollection",
     "items": [
         {
