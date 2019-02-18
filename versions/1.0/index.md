@@ -354,23 +354,26 @@ A `Collection` **MAY** have the following:
 }
 ```
 
-## <a href="#document-components-collection" id="document-components-collection" class="headerlink"></a> Partial Collection (Optional)
+## <a href="#document-components-collection" id="document-components-collection" class="headerlink"></a> Sparse Field Sets (Optional)
 Server **MAY** support an ability to return only specific fields requested by client.   
-A `PartialCollection` is a type of [node](#document-components-node) used to represent a specific resource fields based on query string parameter
 * `fields`: query string parameter comma delimited list of fields. May include nested json fields using json pointers
 Has the same attributes as Collection type except resource items are limited to only requested fields.
 ```json
 {
     "@id": "/users?fields=/given_name,/address/zip",
-    "@type": "PartialCollection",
+    "@type": "Collection",
     "items": [
         {
+            "@id": "/users/1",
+            "@type": "User",
             "given_name": "Hubert",
             "address": {
                 "zip": "90094"
             }
         },
         {
+            "@id": "/users/1",
+            "@type": "User",
             "given_name": "Philip",
             "address":{
                 "zip": "90094"
