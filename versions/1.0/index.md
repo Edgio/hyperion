@@ -44,12 +44,12 @@ A `sub-service` URI path **MUST** have the following:
 
 These two rules promote clear differentiation of sub-services and versions, allowing independent development.
 
-### <a href="#conventions-versioning" id="urls" class="headerlink"></a> Versioning 
+### <a href="#conventions-versioning" id="urls" class="headerlink"></a> Versioning
 
 APIs **MUST** provide versioning in the URI path, following the sub-service path.
 
 **MUST** increase either `Major` or `Minor` in the version path whenever a breaking change is introduced. `/vMajor[.Minor]`
-    
+
 * **SHOULD NOT** increase version if adding new endpoints or fields.
 
 * **SHOULD** increase version if changing behavior for an existing API endpoint:
@@ -63,6 +63,22 @@ APIs **MUST** provide versioning in the URI path, following the sub-service path
 `https://api.company.com/sub-service/v1`
 
 `https://api.company.com/sub-service/v1.1`
+
+### <a href="#conventions-query-params" id="urls" class="headerlink"></a> Queries
+
+Thought should be given to how to support filtering and sorting.
+
+#### Django Style
+
+Supports multiple operators, lt (<), gt (>), eq (=).  Multiple queries can be AND together
+
+`https://api.company.com/sub-service/v1/users?first_name__eq=Bob&age__gt=32&sort__age=desc`
+
+#### Jira Query Language Style
+
+Query would be: `first_name = Bob AND age > 32 ORDER BY age DESC`
+
+Base64 encoded: `https://api.company.com/sub-service/v1/users?q=Zmlyc3RfbmFtZSA9IEJvYiBBTkQgYWdlID4gMzIgT1JERVIgQlkgYWdlIERFU0MK`
 
 ## <a href="#conventions-casing" id="conventions-casing" class="headerlink"></a> Naming Conventions
 
