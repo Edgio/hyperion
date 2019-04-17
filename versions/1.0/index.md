@@ -356,7 +356,7 @@ A `Collection` **MAY** have the following:
 
 ## <a href="#document-components-collection" id="document-components-collection" class="headerlink"></a> Sparse Field Sets (Optional)
 Server **MAY** support an ability to return only specific fields requested by client.   
-* `fields`: query string parameter comma delimited list of fields. May include nested json fields using json pointers
+* `fields`: query string parameter comma delimited list of fields. May include nested json fields using [json pointers](https://tools.ietf.org/html/rfc6901).
 Has the same attributes as Collection type except resource items are limited to only requested fields.
 ```json
 {
