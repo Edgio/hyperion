@@ -457,7 +457,7 @@ An `ErrorDetail` **MAY** have the following:
         {
             "@type": "ErrorDetail",
             "@link": {
-                "tenant": {
+                "account": {
                     "href": "/v1/account",
                     "base_path": "https://api.xyz.co",
                     "description": "This is the account endpoint"
