@@ -456,7 +456,7 @@ An `ErrorDetail` **MAY** have the following:
         },
         {
             "@type": "ErrorDetail",
-            "@link": {
+            "@links": {
                 "account": {
                     "href": "/v1/account",
                     "base_path": "https://api.xyz.co",
