@@ -426,27 +426,6 @@ An `Error` **MAY** have the following:
 * `status_code`: Represents the HTTP status code associated with response as integer.
 * `details`: Array of [error detail](#document-components-error-detail).
 
-```json
-{
-    "@type": "Error",
-    "code": "invalid_request",
-    "status_code": 400,
-    "title": "One or more properties were empty",
-    "description": "One or more required fields were empty or missing from the request.",
-    "details": [
-        {
-            "@type": "ErrorDetail",
-            "source": "/given_name",
-            "description": "Must not be empty"
-        },
-        {
-            "@type": "ErrorDetail",
-            "source": "/family_name",
-            "description": "Must not be empty"
-        }
-    ]
-}
-```
 
 ## <a href="#document-components-error-detail" id="document-components-error-detail" class="headerlink"></a> Error Detail
 
@@ -458,4 +437,35 @@ An `ErrorDetail` **MUST** have the following:
 * `description`: Detail description about the error as string.
 
 An `ErrorDetail` **MAY** have the following:
+* `@links`: Repesents a [link](#document-components-link-collection) with navigational _links_ to other APIs and additional resources.
 * `source`: Represents a JSON Pointer [[RFC6901](https://tools.ietf.org/html/rfc6901)] as string.
+
+
+```json
+{
+    "@type": "Error",
+    "code": "invalid_request",
+    "status_code": 400,
+    "title": "One or more properties were empty or invalid",
+    "description": "One or more required fields were empty or not meeting valdiation requirements.",
+    "details": [
+        {
+            "@type": "ErrorDetail",
+            "source": "/first_name",
+            "description": "Must not be empty and a mininum of 4 characters"
+        },
+        {
+            "@type": "ErrorDetail",
+            "@link": {
+                "tenant": {
+                    "href": "/v1/account",
+                    "base_path": "https://api.xyz.co",
+                    "description": "This is the account endpoint"
+                }
+            },
+            "source": "/account_id",
+            "description": "Must not be empty"
+        }
+    ]
+}
+```
