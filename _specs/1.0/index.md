@@ -188,7 +188,7 @@ A `Link` **MUST** have the following:
 
 ### <a href="#document-components-link-value-object" id="document-components-link-value-object" class="headerlink"></a> Link Value Object
 
-A `LinkValue` is an object containing a valid URI and basePath.
+A `LinkValue` is an object containing a valid URI.
 
 A `LinkValue` **MUST** have the property `href` which represents a valid [URI](#conventions-uri).
 
