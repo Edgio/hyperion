@@ -27,9 +27,14 @@
                         {% for node in site.navigation %}
                             {% assign url = page.url | replace: "index.html", "" %}
                             {% if url == node.url %}
-                                <a class="mdc-tab mdc-tab--active" href="{{site.url}}{{node.url}}">{{node.title}}</a>
+                                <a class="mdc-tab mdc-tab--active" href="{{site.url}}{{node.url}}" title="{{node.title}}">{{node.title}}</a>
                             {% else %}
-                                <a class="mdc-tab" href="{{site.url}}{{node.url}}">{{node.title}}</a>
+                                {% assign external_url = node.url | slice: 0, 4 %}
+                                {% if external_url == 'http' %}
+                                <a class="mdc-tab" href="{{node.url}}" title="{{node.title}}" target="_blank">{{node.title}}</a>
+                                {% else %}
+                                <a class="mdc-tab" href="{{site.url}}{{node.url}}" title="{{node.title}}">{{node.title}}</a>
+                                {% endif %}
                             {% endif %}
                         {% endfor %}
                         <span class="mdc-tab-bar__indicator"></span>
