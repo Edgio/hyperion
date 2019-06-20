@@ -1,5 +1,5 @@
-url: https://pages.git.edgecastcdn.net/api-workgroup/hyperion
-baseurl: /api-workgroup/hyperion
+url: https://verizondigital.github.io/hyperion
+baseurl: /hyperion
 safe: true
 lsi: false
 source: .
@@ -34,7 +34,7 @@ kramdown:
   math_engine: mathjax # cannot customize
   syntax_highligher: rouge # cannot customize
 
-gems:
+plugins:
   - jekyll-redirect-from
 
 exclude:
@@ -50,10 +50,8 @@ port: 9876
 
 latest_version: 1.0
 
-collections:
-  specs:
-    output: true
-
 navigation:
-- title: Specifications
-  url: /specs/
+- title: Current Version
+  url: /versions/
+- title: Github
+  url: https://github.com/VerizonDigital/hyperion
