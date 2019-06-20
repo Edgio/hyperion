@@ -24,7 +24,7 @@ Servers **MUST** send all JSON data in response documents with the header
 
 Anywhere a **URI** is specified, it must adhere to the following rules:
 
-* **MUST** be a valid URI.
+* **MUST** be a valid URI that is active and responds to requests.
 * **MAY** contain all query string parameters used to retrieve that resource.
 * **MUST** be relative path as it's sometimes difficult for servers to construct an absolute path reliably.
 * **MUST** use `-` or hyphen as delimiter for words within the path.
