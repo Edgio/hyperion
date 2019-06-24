@@ -412,12 +412,12 @@ A `EntryPoint` **MAY** have the following:
 
 ## <a href="#document-components-error" id="document-components-error" class="headerlink"></a> Error
 
-Processing errors can be handled by returning a [node](#document-components-node) of `Error` to consumers. In addition, an appropriate HTTP status code, a human readable `code` must be returned.
+Processing errors can be handled by returning a [node](#document-components-node) of `Error` to consumers. In addition, an appropriate HTTP status code, a human-readable `code` must be returned.
 
 An `Error` **MUST** have the following:
 
 * `@type`: Have a value of `Error`.
-* `code`: A human readable error code as string following `snake_case`.
+* `code`: A human-readable error code as a string following `snake_case`.
 * `title`: The main error heading as string.
 
 An `Error` **MAY** have the following:
@@ -439,6 +439,7 @@ An `ErrorDetail` **MUST** have the following:
 An `ErrorDetail` **MAY** have the following:
 * `@links`: Repesents a [link](#document-components-link-collection) with navigational _links_ to other APIs and additional resources.
 * `source`: Represents a JSON Pointer [[RFC6901](https://tools.ietf.org/html/rfc6901)] as string.
+* `code`: A human-readable, application-specific error code as a string following `snake_case`.
 
 
 ```json
