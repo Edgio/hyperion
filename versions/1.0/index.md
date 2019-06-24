@@ -417,12 +417,13 @@ Processing errors can be handled by returning a [node](#document-components-node
 An `Error` **MUST** have the following:
 
 * `@type`: Have a value of `Error`.
-* `code`: A human readable error code as string following `snake_case`.
+* `code`: A human readable error code as a string following `snake_case`.
 * `title`: The main error heading as string.
 
 An `Error` **MAY** have the following:
 
 * `description`: Detail description about the error as string.
+* `code`: A human readable, application-specific error code as a string following `snake_case`.
 * `status_code`: Represents the HTTP status code associated with response as integer.
 * `details`: Array of [error detail](#document-components-error-detail).
 
