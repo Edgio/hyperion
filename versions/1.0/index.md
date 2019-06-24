@@ -423,7 +423,6 @@ An `Error` **MUST** have the following:
 An `Error` **MAY** have the following:
 
 * `description`: Detail description about the error as string.
-* `code`: A human readable, application-specific error code as a string following `snake_case`.
 * `status_code`: Represents the HTTP status code associated with response as integer.
 * `details`: Array of [error detail](#document-components-error-detail).
 
@@ -440,6 +439,7 @@ An `ErrorDetail` **MUST** have the following:
 An `ErrorDetail` **MAY** have the following:
 * `@links`: Repesents a [link](#document-components-link-collection) with navigational _links_ to other APIs and additional resources.
 * `source`: Represents a JSON Pointer [[RFC6901](https://tools.ietf.org/html/rfc6901)] as string.
+* `code`: A human readable, application-specific error code as a string following `snake_case`.
 
 
 ```json
