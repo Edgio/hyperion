@@ -50,9 +50,9 @@ Example of the `start` and `end` time range _reflected_ in the response body.
 
 # <a href="#time-series-datetime" id="time-series-datetime" class="headerlink"></a> Relative Datetime Format
 
-APIs **MUST** accept the a datetime keyword with optional modifiers when handling relative datetime.
+APIs **MUST** accept a datetime keyword with optional modifiers when handling relative datetime.
 
-The following modifiers and time ranges **MAY** be used in conjunction with the a datetime keyword following the format `(now|start_day|start_week|start_month|start_year)[+|-][time_integer][yMwdms]`. 
+The following modifiers and time ranges **MAY** be used in conjunction with a datetime keyword following the format `(now|start_day|start_week|start_month|start_year)[+|-][time_integer][yMwdms]`. 
 
 * `now` uses the current datetime.
 
