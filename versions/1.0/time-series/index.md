@@ -50,27 +50,37 @@ Example of the `start` and `end` time range _reflected_ in the response body.
 
 # <a href="#time-series-datetime" id="time-series-datetime" class="headerlink"></a> Relative Datetime Format
 
-APIs **MUST** accept the `now` keyword with optional modifiers when handling relative datetime.
+APIs **MUST** accept the a datetime keyword with optional modifiers when handling relative datetime.
 
-The following modifiers and time ranges **MAY** be used in conjunction with the `now` keyword following the format `now[+|-][time_integer][yMwdms]`. 
+The following modifiers and time ranges **MAY** be used in conjunction with the a datetime keyword following the format `(now|start_day|start_week|start_month|start_year)[+|-][time_integer][yMwdms]`. 
 
-* `+` add time range to `now` datetime keyword.
+* `now` uses the current datetime.
 
-* `-` subtract time range from `now` datetime keyword.
+* `start_day` uses the midnight of today.
+
+* `start_week` uses the midnight of Monday of the current week.
+
+* `start_month` uses the midnight of the fist day of the current month.
+
+* `start_year` uses the midnight of the first day of the current year.
+
+* `+` add time range to a datetime keyword.
+
+* `-` subtract time range from a datetime keyword.
 
 * `[time_integer]` time integer value.
 
-* `[y]`ears time range to add/subtract to `now` datetime keyword.
+* `[y]`ears time range to add/subtract to a datetime keyword.
 
-* `[M]`onths time range to add/subtract to `now` datetime keyword. 
+* `[M]`onths time range to add/subtract to a datetime keyword. 
 
-* `[w]`eeks time range to add/subtract to `now` datetime keyword.
+* `[w]`eeks time range to add/subtract to a datetime keyword.
 
-* `[d]`ays time range to add/subtract to `now` datetime keyword.
+* `[d]`ays time range to add/subtract to a datetime keyword.
 
-* `[m]`inutes time range to add/subtract to `now` datetime keyword.
+* `[m]`inutes time range to add/subtract to a datetime keyword.
 
-* `[s]`econds time range to add/subtract to `now` datetime keyword.
+* `[s]`econds time range to add/subtract to a datetime keyword.
 
 > Note: If a requested datetime falls on an invalid date when using month time range `[M]`, APIs must add/subtract days until a valid datetime is found.
 
