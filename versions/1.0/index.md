@@ -6,7 +6,7 @@ version: 1.0
 
 # <a href="#introduction" id="introduction" class="headerlink"></a> Introduction
 
-Hyperion is a lightweight data specification that is a subset of [JSON-LD](https://json-ld.org/spec/latest/json-ld) with some sane defaults. It is pure JSON and meant to provide an easy, low-friction path towards a semantic and [hypermedia](https://en.wikipedia.org/wiki/HATEOAS) driven API. The goal is for APIs to use Hyperion as a way to incrementally become JSON-LD complaint. Future versions of this specification may start adding more and more JSON-LD syntax and components.
+Hyperion is a lightweight specification for RESTful JSON APIs.  It endeavors to provide guidance and convention for the variety of decisions API-writers need to make during their development.  Hyperion also takes some inspiration from [JSON-LD](https://json-ld.org/spec/latest/json-ld) as a nod to [hypermedia](https://en.wikipedia.org/wiki/HATEOAS), but with emphasis on low-overhead to make it easier for API-writers to adopt.
 
 # <a href="#conformance" id="conformance" class="headerlink"></a> Conformance
 
