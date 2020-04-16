@@ -378,6 +378,45 @@ A `Collection` **MAY** have the following:
 }
 ```
 
+An example of a `collection` where the `items` are _not Hyperion_ :
+
+```json
+{
+    "@id": "/users?page=2&page_size=4",
+    "@type": "Collection",
+    "@links": {
+        "first": {
+            "href": "/users?page=1&page_size=4"
+        },
+        "next": {
+            "href": "/users?page=3&page_size=4"
+        },
+        "previous": {
+            "href": "/users?page=1&page_size=4"
+        },
+        "last": {
+            "href": "/users?page=5&page_size=4"
+        }
+    },
+    "items": [
+        {
+            "country_code": "USA",
+            "age": 32,
+            "given_name": "Hubert",
+            "family_name": "Farnsworth"
+        },
+        {
+            "country_code": "FRA",
+            "age": 25,
+            "given_name": "Philip",
+            "family_name": "Fry"
+        },
+        ...
+    ],
+    "total_items": 20
+}
+```
+
 ## <a href="#document-entry-point" id="document-entry-point" class="headerlink"></a> Entry Point
 
 An `EntryPoint` is a type of [node](#document-components-node) used to represent a resource that clients can use to get more information about an API and provide [links](#document-components-link-collection) to traverse.
