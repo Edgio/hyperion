@@ -332,9 +332,21 @@ A `Collection` **MUST** have the following:
     * Can be a [node](#document-components-node) with the same type. These nodes **MUST** have an `@id`.
     * Can be any arbitrary _thing_.
 
-A `Collection` **MAY** have the following:
+A `Collection` **MAY** paginate resources, i.e. return a subset of the full collection. 
+
+A request for a subset of a paginated `Collection` **MUST** use the following query string parameters:
+
+* `page`: The desired subset of the `Collection`
+* `page_size`: The number of resources in each paginated `Collection`
+
+A request for a paginated `Collection` without the above query string parameters should result in a default of `page=1` and a `page_size` that is sane for your application.
+
+A paginated `Collection` **MUST** have the following:
 
 * `total_items`: Represents the total number of _things_ as integer.
+
+A paginated `Collection` **MAY** have the following:
+
 * `@links`: Represents a [link](#document-components-link-collection) with the following keywords specific to pagination:
     * `first`: Represents a [link value](#document-components-link-value) navigating to the first page in the collection.
     * `next`: Represents a [link value](#document-components-link-value) navigating to the next page in the collection. **MUST NOT** be displayed if on the last page.
