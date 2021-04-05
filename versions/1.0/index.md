@@ -54,6 +54,11 @@ status code | description | [error code](#document-components-error-codes) | not
 201 | Created | | Resource has been created and processed successfully
 202 | Accepted | | The request has been accepted for processing, but the processing has not been completed.
 204 | No content | | (for deletions only) The deletion process has completed
+301 | Moved Permanently | Redirect requests permanently, and allow for changing method
+303 | See Other | Redirect requests temporarily, and allow for changing method
+304 | Not Modified | Implicit redirection to client's cache
+307 | Temporary Redirect | Redirect requests temporarily, and do not allow changing method
+308 | Permanent Redirect | Redirect requests permanently, and do not allow changing method
 400 | Bad Request | invalid_input | The request has one or more errors and cannot be processed
 401 | Unauthorized | unauthorized | The request did not include a required authentication component
 403 | Forbidden | forbidden | The request has failed authorization checks
@@ -61,6 +66,7 @@ status code | description | [error code](#document-components-error-codes) | not
 405 | Method not allowed | method_not_allowed | The http method was not valid at the specified URI
 409 | Conflict | invalid_operation | The request could not be completed due to a conflict with the current state of the target resource
 413 | Payload Too Large | payload_too_large | Request payload is too large and the server will not process it
+422 | Unprocessable Entity | The request and it's body are valid and parseable, but are malformed in a semantic way (missing data, incorrect structure)
 429 | Too many Requests | rate_limit_reached | Too many requests have been received in a given amount of time
 500 | Internal server error | internal_error | The server cannot process the request for an unknown reason
 502 | Bad gateway | bad_gateway | The gateway server or proxy received an invalid response from upstream server while fulfilling a request
