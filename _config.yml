@@ -1,4 +1,4 @@
-url: https://verizondigital.github.io/hyperion
+url: https://edgecast.github.io/hyperion
 baseurl: /hyperion
 safe: true
 lsi: false
@@ -54,4 +54,4 @@ navigation:
 - title: Current Version
   url: /versions/
 - title: Github
-  url: https://github.com/VerizonDigital/hyperion
+  url: https://github.com/EdgeCast/hyperion
