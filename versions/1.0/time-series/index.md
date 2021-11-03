@@ -68,6 +68,8 @@ The following modifiers and time ranges **MAY** be used in conjunction with the 
 
 * `[d]`ays time range to add/subtract to `now` datetime keyword.
 
+* `[h]`ours time range to add/subtract to `now` datetime keyword.
+
 * `[m]`inutes time range to add/subtract to `now` datetime keyword.
 
 * `[s]`econds time range to add/subtract to `now` datetime keyword.
