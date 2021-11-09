@@ -111,7 +111,7 @@ An example of _date_ only value.
 
 ```json
 {
-    "@id": "/users/1",
+    "@uid": "/users/1",
     "@type": "User",
     "given_name": "Hubert",
     "family_name": "Farnsworth",
@@ -127,7 +127,7 @@ An example of UTC _datetime_ value.
 
 ```json
 {
-    "@id": "/users/1",
+    "@uid": "/users/1",
     "@type": "User",
     "given_name": "Hubert",
     "family_name": "Farnsworth",
@@ -146,7 +146,7 @@ An example of _time series_ using relative time.
 
 ```json
 {
-    "@id": "/analytics/v1/time-series?start=now-1M&end=now",
+    "@uid": "/analytics/v1/time-series?start=now-1M&end=now",
     "@type": "TimeSeries",
     "start": "2018-05-18T21:43:25Z",
     "end": "2018-06-18T21:43:25Z",
@@ -159,13 +159,13 @@ An example of _time series_ using relative time.
 
 Hyperion specifies a few keywords as part of the core specification:
 
-* `@id`: Used to specify the [URI](#conventions-uri) for the resource. Can be used by clients to navigate back to that specific resource. This **SHOULD NOT** be confused as the identifier for the instance of that resource.
+* `@uid`: Used to specify the [URI](#conventions-uri) for the resource. Can be used by clients to navigate back to that specific resource. This **SHOULD NOT** be confused as the identifier for the instance of that resource.
 
-    Example of the difference between `@id` and a similar property like `id`:
+    Example of the difference between `@uid` and a similar property like `id`:
 
 ```json
 {
-    "@id": "/connect/userinfo/1",
+    "@uid": "/connect/userinfo/1",
     "@type": "UserInfo",
     "id": 1,
     "given_name": "Hubert",
@@ -179,7 +179,7 @@ Hyperion specifies a few keywords as part of the core specification:
 
 > Note: To avoid compatibility issues, properties starting with an `@` character are restricted as they might be used as keywords in future versions of JSON-LD. Properties starting with an `@` character that are not JSON-LD keywords are treated as any other property, i.e., they are ignored. Keywords are case-sensitive.
 >
-> Restricted keywords are: `@context`, `@id`, `@value`, `@language`, `@type`, `@container`, `@list`, `@set`, `@reverse`, `@index`, `@base`, `@vocab`, `@graph`, `@nest`, `@prefix`, `@version`, `@links`
+> Restricted keywords are: `@context`, `@uid`, `@value`, `@language`, `@type`, `@container`, `@list`, `@set`, `@reverse`, `@index`, `@base`, `@vocab`, `@graph`, `@nest`, `@prefix`, `@version`, `@links`
 
 
 # <a href="#document" id="document" class="headerlink"></a> Document Structure
@@ -201,11 +201,11 @@ All JSON properties **MUST** follow [naming conventions](#conventions-casing).
 }
 ```
 
-The _top most_ JSON object **MUST** be a [node](#document-components-node) and **MUST** contain an `@id` property unless _creating_ a new resource.
+The _top most_ JSON object **MUST** be a [node](#document-components-node) and **MUST** contain an `@uid` property unless _creating_ a new resource.
 
 ```json
 {
-    "@id": "/users/1",
+    "@uid": "/users/1",
     ...
 }
 ```
@@ -214,7 +214,7 @@ An example of a node with query string parameters:
 
 ```json
 {
-    "@id": "/users?page=1",
+    "@uid": "/users?page=1",
     ...
 }
 ```
@@ -223,7 +223,7 @@ The top most JSON object **MUST** be a [node](#document-components-node) and **M
 
 ```json
 {
-    "@id": "/users/1",
+    "@uid": "/users/1",
     "@type": "User",
     "given_name": "Hubert",
     "family_name": "Farnsworth"
@@ -233,9 +233,9 @@ The top most JSON object **MUST** be a [node](#document-components-node) and **M
 
 ## <a href="#document-components-node" id="document-components-node" class="headerlink"></a> Node
 
-A `Node` represents a JSON object. A `Node` **MUST** contain the `@id` property if it is the top most object. It **SHOULD NOT** be in the JSON object when _creating_ a resource.
+A `Node` represents a JSON object. A `Node` **MUST** contain the `@uid` property if it is the top most object. It **SHOULD NOT** be in the JSON object when _creating_ a resource.
 
-The `@id` property represents a valid [URI](#conventions-uri) and follows conventions described in the [keywords section](#keywords).
+The `@uid` property represents a valid [URI](#conventions-uri) and follows conventions described in the [keywords section](#keywords).
 
 A `Node` **MUST** contain the `@type` keyword.
 
@@ -245,7 +245,7 @@ An example of `@type`:
 
 ```json
 {
-    "@id": "/users/1",
+    "@uid": "/users/1",
     "@type": "User",
     ...
 }
@@ -255,12 +255,12 @@ A node **MAY** contain nested nodes.
 
 ```json
 {
-    "@id": "/users/1",
+    "@uid": "/users/1",
     "@type": "User",
     "given_name": "Hubert",
     "family_name": "Farnsworth",
     "address" : {
-        "@id": "/users/1/address",
+        "@uid": "/users/1/address",
         "@type": "Address",
         "street": "West 57th Street"
     }
@@ -271,7 +271,7 @@ A node **MAY** contain [links](#document-components-link-collection) with the ke
 
 ```json
 {
-    "@id": "/users/1",
+    "@uid": "/users/1",
     "@type": "User",
     "@links" : {
         "users": {
@@ -308,7 +308,7 @@ A `LinkValue` **MAY** have the following:
 
 ```json
 {
-    "@id": "/users/1",
+    "@uid": "/users/1",
     "@type": "User",
     "@links" : {
         "users": {
@@ -332,10 +332,10 @@ A `Collection` is a type of [node](#document-components-node) used to represent 
 
 A `Collection` **MUST** have the following:
 
-* `@id`: Represents a valid [URI](#conventions-uri).
+* `@uid`: Represents a valid [URI](#conventions-uri).
 * `@type`: Have a value of `Collection`.
 * `items`: Represents an array of _things_.
-    * Can be a [node](#document-components-node) with the same type. These nodes **MUST** have an `@id`.
+    * Can be a [node](#document-components-node) with the same type. These nodes **MUST** have an `@uid`.
     * Can be any arbitrary _thing_.
 
 A `Collection` **MAY** have the following:
@@ -349,7 +349,7 @@ A `Collection` **MAY** have the following:
 
 ```json
 {
-    "@id": "/users?page=2&page_size=4",
+    "@uid": "/users?page=2&page_size=4",
     "@type": "Collection",
     "@links": {
         "first": {
@@ -367,13 +367,13 @@ A `Collection` **MAY** have the following:
     },
     "items": [
         {
-            "@id": "/users/1",
+            "@uid": "/users/1",
             "@type": "User",
             "given_name": "Hubert",
             "family_name": "Farnsworth"
         },
         {
-            "@id": "/users/2",
+            "@uid": "/users/2",
             "@type": "User",
             "given_name": "Philip",
             "family_name": "Fry"
@@ -392,7 +392,7 @@ It **MUST** be the top most JSON object and **MUST NOT** be nested.
 
 An `EntryPoint` **MUST** have the following:
 
-* `@id`: Represents a valid [URI](#conventions-uri).
+* `@uid`: Represents a valid [URI](#conventions-uri).
 * `@type`: Have a value of `EntryPoint`.
 * `@links`: Represents a [link](#document-components-link-collection) with navigational _links_ to other APIs and additional resources.
 
@@ -414,7 +414,7 @@ A `EntryPoint` **MAY** have the following:
 ```json
 {
   "@type": "EntryPoint",
-  "@id": "/foo/v1",
+  "@uid": "/foo/v1",
   "@links": {
     "users": {
       "href": "/foo/v1/users",

@@ -40,7 +40,7 @@ Example of the `start` and `end` time range _reflected_ in the response body.
 
 ```json
 {
-    "@id": "/analytics/v1/time-series",
+    "@uid": "/analytics/v1/time-series",
     "@type": "TimeSeries",
     "start": "2018-05-18T21:43:25Z",
     "end": "2018-06-18T21:43:25Z",
@@ -97,7 +97,7 @@ This example gets time series data using API default values. Notice how the `sta
 
 ```json
 {
-    "@id": "/analytics/v1/time-series",
+    "@uid": "/analytics/v1/time-series",
     "@type": "TimeSeries",
     "start": "2018-06-11T21:43:25Z",
     "end": "2018-06-18T21:43:25Z",
@@ -111,7 +111,7 @@ This example gets time series data using a [relative datetime](#time-series-date
 
 ```json
 {
-    "@id": "analytics/v1/time-series?start=now-1M",
+    "@uid": "analytics/v1/time-series?start=now-1M",
     "@type": "TimeSeries",
     "start": "2018-05-18T21:43:25Z",
     "end": "2018-06-18T21:43:25Z",
@@ -125,7 +125,7 @@ This example gets time series data using a [relative datetime](#time-series-date
 
 ```json
 {
-    "@id": "analytics/v1/time-series?start=now-1w&end=now-1d",
+    "@uid": "analytics/v1/time-series?start=now-1w&end=now-1d",
     "@type": "TimeSeries",
     "start": "2018-06-11T21:43:25Z",
     "end": "2018-06-17T21:43:25Z",
@@ -139,7 +139,7 @@ This example gets time series data using an [absolute datetime](#time-series-abs
 
 ```json
 {
-    "@id": "analytics/v1/time-series?start=2018-05-18T21:43:25Z&end=now-1d",
+    "@uid": "analytics/v1/time-series?start=2018-05-18T21:43:25Z&end=now-1d",
     "@type": "TimeSeries",
     "start": "2018-05-18T21:43:25Z",
     "end": "2018-06-17T21:43:25Z",
