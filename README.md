@@ -22,4 +22,4 @@ Requirements:
 Documentation:
 --------------
 
-Hyperion docs are hosted at https://edgecast.github.io/hyperion.
+Hyperion docs are hosted at https://edgio.github.io/hyperion.
