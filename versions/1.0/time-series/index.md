@@ -52,7 +52,7 @@ Example of the `start` and `end` time range _reflected_ in the response body.
 
 APIs **MUST** accept the `now` keyword with optional modifiers when handling relative datetime.
 
-The following modifiers and time ranges **MAY** be used in conjunction with the `now` keyword following the format `now[+|-][time_integer][yMwdms]`. 
+The following modifiers and time ranges **MAY** be used in conjunction with the `now` keyword following the format `now[+|-][time_integer][yMwdhms]`. 
 
 * `+` add time range to `now` datetime keyword.
 
@@ -67,6 +67,8 @@ The following modifiers and time ranges **MAY** be used in conjunction with the 
 * `[w]`eeks time range to add/subtract to `now` datetime keyword.
 
 * `[d]`ays time range to add/subtract to `now` datetime keyword.
+
+* `[h]`ours time range to add/subtract to `now` datetime keyword.
 
 * `[m]`inutes time range to add/subtract to `now` datetime keyword.
 
