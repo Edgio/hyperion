@@ -1,0 +1,11 @@
+{
+  "@id": "/users/1",
+  "@type": "User",
+  "@links": {
+    "dogs": {
+      "href": "/dogs",
+      "description": "Get all the dogs",
+      "base_path": ""
+    }
+  }
+}

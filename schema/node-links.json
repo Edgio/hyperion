@@ -1,0 +1,12 @@
+{
+  "type": "object",
+  "title": "links",
+  "additionalProperties": {
+    "$ref": "./node-link-value.json"
+  },
+  "description": "Links is an object used to represent a collection of link values related to the resource.",
+  "x-tags": [
+    "hyperion"
+  ],
+  "readOnly": true
+}

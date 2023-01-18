@@ -1,0 +1,12 @@
+{
+  "type": "array",
+  "title": "error-details",
+  "description": "error-details is an object used to represent a collection of error detail values related to the error.",
+  "x-tags": [
+    "hyperion"
+  ],
+  "items": {
+    "$ref": "./error-detail.json"
+  },
+  "readOnly": true
+}

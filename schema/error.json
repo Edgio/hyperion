@@ -1,0 +1,73 @@
+{
+  "type": "object",
+  "description": "",
+  "x-examples": {
+    "example-1": {
+      "@type": "Error",
+      "code": "unauthorized",
+      "status_code": 401,
+      "title": "You are not authorized to access this resource"
+    }
+  },
+  "x-tags": [
+    "hyperion"
+  ],
+  "title": "error",
+  "additionalProperties": false,
+  "properties": {
+    "@type": {
+      "type": "string",
+      "enum": [
+        "Error"
+      ],
+      "description": "The value of this is \"Error\"",
+      "pattern": "^[A-Z][a-zA-Z0-9]*$"
+    },
+    "code": {
+      "type": "string",
+      "enum": [
+        "unauthorized",
+        "forbidden",
+        "not_found",
+        "invalid_operation",
+        "invalid_input",
+        "internal_error",
+        "rate_limit_reached",
+        "payload_too_large",
+        "method_not_allowed",
+        "bad_gateway",
+        "service_unavailable",
+        "gateway_timeout"
+      ],
+      "description": "A human readable error code as string following snake_case",
+      "pattern": "^[a-z][a-z_]*[a-z]$"
+    },
+    "status_code": {
+      "type": "integer",
+      "minimum": 100,
+      "maximum": 599,
+      "description": "Represents the HTTP status code associated with response as integer"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The main error heading as string"
+    },
+    "description": {
+      "type": "string",
+      "description": "Detailed description about the error as string"
+    },
+    "details": {
+      "description": "Array of error detail",
+      "type": "array",
+      "items": {
+        "$ref": "./error-detail.json"
+      }
+    }
+  },
+  "required": [
+    "@type",
+    "code",
+    "title"
+  ]
+}
