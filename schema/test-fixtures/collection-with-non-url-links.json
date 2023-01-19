@@ -1,0 +1,10 @@
+{
+  "@id": "/users/1",
+  "@type": "Collection",
+  "@links": {
+    "first": 1,
+    "last": 2,
+    "next": 3,
+    "previous": 4
+  }
+}

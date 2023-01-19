@@ -1,0 +1,31 @@
+{
+  "type": "object",
+  "title": "collection-links",
+  "additionalProperties": false,
+  "properties": {
+    "first": {
+      "type": "string",
+      "format": "uri",
+      "readOnly": true
+    },
+    "next": {
+      "type": "string",
+      "format": "uri",
+      "readOnly": true
+    },
+    "previous": {
+      "type": "string",
+      "format": "uri",
+      "readOnly": true
+    },
+    "last": {
+      "type": "string",
+      "format": "uri",
+      "readOnly": true
+    }
+  },
+  "description": "",
+  "x-tags": [
+    "hyperion"
+  ]
+}

@@ -1,2 +1,4 @@
 public/
 Gemfile.lock
+.idea
+.DS_Store

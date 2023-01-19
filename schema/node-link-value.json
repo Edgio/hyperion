@@ -1,0 +1,25 @@
+{
+  "title": "node-link-value",
+  "x-tags": [
+    "hyperion"
+  ],
+  "type": "object",
+  "description": "A node-link-value is an object containing a valid URI. See https://edgecast.github.io/hyperion/versions/1.0/#document-components-link-value",
+  "properties": {
+    "href": {
+      "type": "string",
+      "format": "uri-reference"
+    },
+    "description": {
+      "type": "string"
+    },
+    "base_path": {
+      "type": "string",
+      "format": "uri"
+    }
+  },
+  "required": [
+    "href",
+    "base_path"
+  ]
+}

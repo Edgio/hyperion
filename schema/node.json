@@ -1,0 +1,25 @@
+{
+  "title": "node",
+  "type": "object",
+  "x-tags": [
+    "hyperion"
+  ],
+  "description": "Represents a hyperion JSON object",
+  "properties": {
+    "@id": {
+      "type": "string",
+      "format": "uri-reference"
+    },
+    "@type": {
+      "type": "string",
+      "pattern": "^[A-Z][a-zA-Z0-9]*$"
+    },
+    "@links": {
+      "$ref": "./node-links.json"
+    }
+  },
+  "required": [
+    "@id",
+    "@type"
+  ]
+}

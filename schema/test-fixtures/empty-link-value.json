@@ -1,0 +1,8 @@
+{
+  "@id": "/users/1",
+  "@type": "User",
+  "@links": {
+    "dogs": {
+    }
+  }
+}
