@@ -13,6 +13,11 @@ func TestCollectionSchema(t *testing.T) {
 			jsonPath:   "./test-fixtures/collection-minimum-required.json",
 		},
 		{
+			name:       "Valid collection with links",
+			schemaPath: "./collection.json",
+			jsonPath:   "./test-fixtures/collection-with-non-empty-links.json",
+		},
+		{
 			name:       "Valid collection with empty links",
 			schemaPath: "./collection.json",
 			jsonPath:   "./test-fixtures/collection-with-empty-links.json",

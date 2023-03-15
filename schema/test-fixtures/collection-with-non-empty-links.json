@@ -1,0 +1,22 @@
+{
+  "@id": "/users/1?offset=20&limit=10",
+  "@type": "Collection",
+  "@links": { 
+    "first": {
+      "href": "https://www.example.com?limit=10",
+      "description": "first page"
+    },
+    "next": {
+      "href": "https://www.example.com?offset=30&limit=10",
+      "description": "next page"
+    },
+    "previous": {
+      "href": "https://www.example.com?offset=10&limit=10",
+      "description": "previous page"
+    },
+    "last": {
+      "href": "https://www.example.com?offset=90&limit=10",
+      "description": "last page"
+    }
+  }
+}
