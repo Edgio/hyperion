@@ -1,2 +1,1 @@
-[@links.dogs] base_path is required
 [@links.dogs] href is required

@@ -1,4 +1,4 @@
-[@links.first] Invalid type. Expected: string, given: integer
-[@links.last] Invalid type. Expected: string, given: integer
-[@links.next] Invalid type. Expected: string, given: integer
-[@links.previous] Invalid type. Expected: string, given: integer
+[@links.first] Invalid type. Expected: object, given: integer
+[@links.last] Invalid type. Expected: object, given: integer
+[@links.next] Invalid type. Expected: object, given: integer
+[@links.previous] Invalid type. Expected: object, given: integer

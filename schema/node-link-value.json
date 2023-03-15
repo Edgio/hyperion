@@ -19,7 +19,6 @@
     }
   },
   "required": [
-    "href",
-    "base_path"
+    "href"
   ]
 }
