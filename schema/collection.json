@@ -9,7 +9,8 @@
   "properties": {
     "@id": {
       "type": "string",
-      "format": "uri-reference"
+      "format": "uri-reference",
+      "x-go-name": "HyperionId"
     },
     "@type": {
       "type": "string",
