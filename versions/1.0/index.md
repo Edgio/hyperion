@@ -384,6 +384,39 @@ A `Collection` **MAY** have the following:
 }
 ```
 
+## <a href="#document-components-collection" id="document-components-collection" class="headerlink"></a> Sparse Field Sets (Optional)
+Server **MAY** support an ability to return only specific fields requested by client.   
+* `fields`: query string parameter comma delimited list of fields. May include nested json fields using [json pointers](https://tools.ietf.org/html/rfc6901).
+Has the same attributes as Collection type except resource items are limited to only requested fields.
+```json
+{
+    "@id": "/users?fields=/given_name,/address/zip",
+    "@type": "Collection",
+    "items": [
+        {
+            "@id": "/users/1",
+            "@type": "User",
+            "given_name": "Hubert",
+            "address": {
+                "zip": "90094"
+            }
+        },
+        {
+            "@id": "/users/1",
+            "@type": "User",
+            "given_name": "Philip",
+            "address":{
+                "zip": "90094"
+            }
+        },
+        ...
+    ],
+    "total_items": 20
+}
+```
+
+
+
 ## <a href="#document-entry-point" id="document-entry-point" class="headerlink"></a> Entry Point
 
 An `EntryPoint` is a type of [node](#document-components-node) used to represent a resource that clients can use to get more information about an API and provide [links](#document-components-link-collection) to traverse.
