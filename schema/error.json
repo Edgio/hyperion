@@ -21,7 +21,8 @@
         "Error"
       ],
       "description": "The value of this is \"Error\"",
-      "pattern": "^[A-Z][a-zA-Z0-9]*$"
+      "pattern": "^[A-Z][a-zA-Z0-9]*$",
+      "x-go-name": "HyperionType"
     },
     "code": {
       "type": "string",
