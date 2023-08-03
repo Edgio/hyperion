@@ -18,10 +18,12 @@
       "enum": [
         "ErrorDetail"
       ],
-      "pattern": "^[A-Z][a-zA-Z0-9]*$"
+      "pattern": "^[A-Z][a-zA-Z0-9]*$",
+      "x-go-name": "HyperionType"
     },
     "@links": {
-      "$ref": "./node-links.json"
+      "$ref": "./node-links.json",
+      "x-go-name": "HyperionLinks"
     },
     "source": {
       "type": "string",

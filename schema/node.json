@@ -8,14 +8,17 @@
   "properties": {
     "@id": {
       "type": "string",
-      "format": "uri-reference"
+      "format": "uri-reference",
+      "x-go-name": "HyperionId"
     },
     "@type": {
       "type": "string",
-      "pattern": "^[A-Z][a-zA-Z0-9]*$"
+      "pattern": "^[A-Z][a-zA-Z0-9]*$",
+      "x-go-name": "HyperionType"
     },
     "@links": {
-      "$ref": "./node-links.json"
+      "$ref": "./node-links.json",
+      "x-go-name": "HyperionLinks"
     }
   },
   "required": [
