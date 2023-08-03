@@ -5,7 +5,6 @@
     "hyperion"
   ],
   "description": "A type of node used to represent a resource returning many of the same kind of thing in a generic way. It MUST be the top most JSON object and MUST NOT be nested. Inheritor's of this schema are responsible for adding the items array because it is not possible to specify it generically here and then more specifically later in the child schema.",
-  "additionalProperties": false,
   "properties": {
     "@id": {
       "type": "string",
