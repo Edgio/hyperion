@@ -55,6 +55,7 @@ class hyperion_finding:
 
 class hyperion_linter:
 
+    # // Class Variables
 
     # // Functions
 
@@ -118,6 +119,9 @@ class hyperion_linter:
     # /// \details
     # /// \return  List of hyperion_error objects identified or None
     def lint_paths(self):
+
+        allowable_methods = ["get", "delete", "put", "post"]
+
         retval = []
         if ("servers" not in self.spec or
             len(self.spec["servers"]) == 0 or
@@ -147,11 +151,23 @@ class hyperion_linter:
             if "_" in path_id:
                 retval.append(hyperion_finding("paths", "path.%s" % path_id, "uses '_' as a separator.  Must use '-'"))
 
-            # must use snake_case for qs
-
             # should lowecase chars
             if not path_id.islower():
                 retval.append(hyperion_finding("paths", "paths.%s" % path_id, "uses uppercase chars", hyperion_finding.TYPE_WARNING))
+
+            # must use snake_case for qs
+            for method in path_val:
+                method_val = path_val[method]
+
+                if not method.islower():
+                    retval.append(hyperion_finding("paths", "paths.%s.%s" % (path_id, method), "should be lowercase", hyperion_finding.TYPE_WARNING))
+
+                # TODO: articulate very clearly the allowable HTTP methods
+                if method.lower() not in allowable_methods:
+                    retval.append(hyperion_finding("paths", "paths.%s.%s" % (path_id, method), "isn't an allowable method: %s" % allowable_methods))
+
+                # test parameters are snake_case
+
         return retval
 
     # /// \brief   Lint how versioning is implemented
