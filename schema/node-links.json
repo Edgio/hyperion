@@ -2,9 +2,10 @@
   "type": "object",
   "title": "links",
   "additionalProperties": {
+    "x-additionalPropertiesName": "hypermedia_link",
     "$ref": "./node-link-value.json"
   },
-  "description": "Links is an object used to represent a collection of link values related to the resource.",
+  "description": "Reserved for hypermedia links that might be provided in the future.",
   "x-tags": [
     "hyperion"
   ],

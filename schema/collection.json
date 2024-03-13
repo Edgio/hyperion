@@ -9,7 +9,8 @@
     "@id": {
       "type": "string",
       "format": "uri-reference",
-      "x-go-name": "HyperionId"
+      "x-go-name": "HyperionId",
+      "description": "The relative URI through which this response was generated"
     },
     "@type": {
       "type": "string",
@@ -17,15 +18,18 @@
         "Collection"
       ],
       "pattern": "^[A-Z][a-zA-Z0-9]*$",
-      "x-go-name": "HyperionType"
+      "x-go-name": "HyperionType",
+      "description": "Returns `Collection`."
     },
     "@links": {
       "$ref": "./collection-links.json",
-      "x-go-name": "HyperionLinks"
+      "x-go-name": "HyperionLinks",
+      "description": "A collection of links related to this collection"
     },
     "total_items": {
       "type": "integer",
-      "readOnly": true
+      "readOnly": true,
+      "description": "The total number of items in this collection"
     }
   },
   "required": [

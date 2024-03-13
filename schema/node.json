@@ -4,21 +4,24 @@
   "x-tags": [
     "hyperion"
   ],
-  "description": "Represents a hyperion JSON object",
+  "description": "An array of items",
   "properties": {
     "@id": {
       "type": "string",
       "format": "uri-reference",
-      "x-go-name": "HyperionId"
+      "x-go-name": "HyperionId",
+      "description": "The resource's URI"
     },
     "@type": {
       "type": "string",
       "pattern": "^[A-Z][a-zA-Z0-9]*$",
-      "x-go-name": "HyperionType"
+      "x-go-name": "HyperionType",
+      "description": "The resource's type"
     },
     "@links": {
       "$ref": "./node-links.json",
-      "x-go-name": "HyperionLinks"
+      "x-go-name": "HyperionLinks",
+      "description": "A collection of links related to the resource"
     }
   },
   "required": [

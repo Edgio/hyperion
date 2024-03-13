@@ -4,18 +4,21 @@
     "hyperion"
   ],
   "type": "object",
-  "description": "A node-link-value is an object containing a valid URI. See https://edgecast.github.io/hyperion/versions/1.0/#document-components-link-value",
+  "description": "An object that contains a valid URI.",
   "properties": {
     "href": {
       "type": "string",
-      "format": "uri-reference"
+      "format": "uri-reference",
+      "description": "A relative URL path"
     },
     "description": {
-      "type": "string"
+      "type": "string",
+      "description": "Additional information about this link."
     },
     "base_path": {
       "type": "string",
-      "format": "uri"
+      "format": "uri",
+      "description": "The base URL path. Construct the URL by prepending this path to the `href` value."
     }
   },
   "required": [
