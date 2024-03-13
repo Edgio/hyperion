@@ -6,7 +6,7 @@
       "@type": "Error",
       "code": "unauthorized",
       "status_code": 401,
-      "title": "You are not authorized to access this resource"
+      "title": "You are not authorized to access this resource."
     }
   },
   "x-tags": [
@@ -20,7 +20,7 @@
       "enum": [
         "Error"
       ],
-      "description": "The value of this is \"Error\"",
+      "description": "Returns `Error`.",
       "pattern": "^[A-Z][a-zA-Z0-9]*$",
       "x-go-name": "HyperionType"
     },
@@ -40,23 +40,23 @@
         "service_unavailable",
         "gateway_timeout"
       ],
-      "description": "A human readable error code as string following snake_case",
+      "description": "Error code",
       "pattern": "^[a-z][a-z_]*[a-z]$"
     },
     "status_code": {
       "type": "integer",
       "minimum": 100,
       "maximum": 599,
-      "description": "Represents the HTTP status code associated with response as integer"
+      "description": "The response's HTTP status code"
     },
     "title": {
       "type": "string",
       "minLength": 1,
-      "description": "The main error heading as string"
+      "description": "Error heading"
     },
     "description": {
       "type": "string",
-      "description": "Detailed description about the error as string"
+      "description": "Detailed error description"
     },
     "details": {
       "description": "Array of error detail",

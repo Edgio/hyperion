@@ -14,7 +14,7 @@
   "properties": {
     "@type": {
       "type": "string",
-      "description": "Value is always \"ErrorDetail\"",
+      "description": "Returns `ErrorDetail`.",
       "enum": [
         "ErrorDetail"
       ],
@@ -28,13 +28,13 @@
     "source": {
       "type": "string",
       "minLength": 1,
-      "description": "Represents a JSON Pointer [RFC6901]",
+      "description": "Represents a JSON pointer.",
       "format": "json-pointer"
     },
     "description": {
       "type": "string",
       "minLength": 1,
-      "description": "Description about the error detail"
+      "description": "Detailed error description"
     }
   },
   "required": [
